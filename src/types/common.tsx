@@ -18,9 +18,3 @@ export interface IconicButtonProps extends ClassNameProps {
   color: colors
   name: string
 }
-
-export interface TextDisplayProps {
-  text: string
-  className: string
-  variant?: string
-}
