@@ -28,9 +28,9 @@ export interface HookDrawerProps {
 
 export const navigation: NavigateProps = [
   { name: 'Home', to: '/', private: false },
-  { name: 'Trending', to: '/trending', private: false },
+  { name: 'Trending', to: '/movies/trending', private: false },
   { name: 'Categories', to: '/categories', private: false },
-  { name: 'Popular', to: '/popular', private: false },
-  { name: 'Upcoming', to: '/upcoming', private: false },
-  { name: 'Favorites', to: '/favorites', private: false },
+  { name: 'Popular', to: '/movies/popular', private: false },
+  { name: 'Upcoming', to: '/movies/upcoming', private: false },
+  { name: 'Favorites', to: '/movies/favorites', private: false },
 ]
