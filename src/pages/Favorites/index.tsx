@@ -1,3 +1,5 @@
+import { MovieGrid } from '@components'
+
 export const Favorites = () => {
-  return <div>Favorites</div>
+  return <MovieGrid category='Favorites' />
 }

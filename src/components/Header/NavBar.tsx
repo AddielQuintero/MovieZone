@@ -9,8 +9,8 @@ export const NavBar = ({ navigation }: { navigation: NavigateProps }) => {
   const { isOpen, handleOpen, handleClosed } = useToggle()
 
   return (
-    <header>
-      <Navbar fullWidth className=" mx-auto px-4 py-3">
+    <>
+      <Navbar fullWidth className="sticky inset-0 z-10 mx-auto px-4 py-1">
         <div className="flex flex-wrap items-center justify-between gap-y-4 text-blue-gray-500">
           <div className="flex">
             <Link to="/" className="-m-1.5 p-1.5">
@@ -49,6 +49,6 @@ export const NavBar = ({ navigation }: { navigation: NavigateProps }) => {
       </Navbar>
 
       <MobileMenu navigation={navigation} open={isOpen} onClose={handleClosed} closeDrawer={handleClosed} />
-    </header>
+    </>
   )
 }

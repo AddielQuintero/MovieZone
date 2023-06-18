@@ -1,1 +1,27 @@
+// body {
+// background-color: #03020a;
+// color: #fff;
+// }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// .backgroundDetail::after {
+//   content: '';
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   height: 20px;
+//   -webkit-box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+//   -moz-box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+//   box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+// }
+
+// .backgroundDetails {
+  // background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+// }
