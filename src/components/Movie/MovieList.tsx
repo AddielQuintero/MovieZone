@@ -5,10 +5,10 @@ import { MovieCard, LinkButton } from '@components'
 import { MovieListProps } from '@types'
 import 'swiper/swiper-bundle.min.css'
 
-export const MovieList = ({ title, redirect }: MovieListProps) => {
+export const MovieList = ({title, redirect }: MovieListProps) => {
   return (
     <>
-      <div className="movie__list">
+      <div className="movie__list ">
         <div className="flex justify-between items-center mb-2">
           <Typography variant="h3" className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400">
             {title}
