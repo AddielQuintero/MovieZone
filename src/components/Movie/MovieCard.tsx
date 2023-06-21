@@ -8,7 +8,7 @@ export const MovieCard = () => {
       shadow={false}
       className="test bg-inherit relative grid h-[19rem] w-full max-w-[12rem]  rounded-none items-end overflow-hidden text-center"
     >
-      <Link to="/movies/category/id" className="">
+      <Link   to={`/movies/category/${1}`} className="">
         <CardHeader
           floated={false}
           shadow={false}

@@ -5,7 +5,7 @@ import { MovieCard } from '@components'
 
 export const MovieGrid = ({ category }: { category: string }) => {
   return (
-    <div className="">
+    <div className="Movie__grid container mx-auto mt-5 px-5 pb-5 sm:p-5">
       <div className="flex justify-between items-center mb-2">
         <Typography variant="h3" className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400 capitalize   ">
           {category}

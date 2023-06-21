@@ -4,6 +4,8 @@ export interface ClassNameProps {
   className?: string
   classIcon?: string
   classTypography?: string
+  classImage?: string
+  classImageReflection?: string
 }
 
 export interface LinkButtonProps extends ClassNameProps {

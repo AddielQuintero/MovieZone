@@ -1,11 +1,14 @@
-import { LinkButton, MovieCategories, MovieImage, MovieInfo, IconicButton } from '@components'
-import { PlayIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid'
 import { Typography } from '@material-tailwind/react'
+import { PlayIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid'
+import { LinkButton, MovieCategories, MovieImage, MovieInfo, IconicButton } from '@components'
+import { MovieProps } from '@types'
 
-export const MovieDetail = () => {
+export const MovieDetail = ({ movie }: MovieProps) => {
+  console.log('🚀  movieMovieDetail:', movie)
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 place-items-center gap-6 max-w-[992px]  mx-auto py-10 md:py-20">
-      <MovieImage />
+    <div className="movie__detail grid grid-cols-1 md:grid-cols-3 place-items-center gap-6 max-w-[992px] mx-auto py-10 md:py-20">
+      <MovieImage url={movie.linkImg} />
 
       <div className="summary flex flex-col h-full col-span-2">
         <div className="hidden md:flex justify-end pb-10">
@@ -18,16 +21,14 @@ export const MovieDetail = () => {
             IconComponent={ArrowLongLeftIcon}
           />
         </div>
-        <MovieInfo />
+        <MovieInfo start={movie.start} time={movie.time} />
 
         <div className="my-2">
           <Typography className="" variant="h4">
-            John Wick: Chapter 4
+            {movie.title}
           </Typography>
           <Typography className="mt-4" variant="paragraph">
-            With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table.
-            But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances
-            across the globe and forces that turn old friends into foes.
+            {movie.description}
           </Typography>
         </div>
 
@@ -41,7 +42,7 @@ export const MovieDetail = () => {
           />
         </div>
 
-        <MovieCategories />
+        <MovieCategories categories={movie.categories} />
       </div>
     </div>
   )
