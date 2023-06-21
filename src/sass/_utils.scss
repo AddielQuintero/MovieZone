@@ -1,0 +1,52 @@
+/* ------------------- Reset ------------------- */
+
+/* ------------------- Colors ------------------- */
+
+/* ------------------- box-sizing ------------------- */
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body {
+  // font-family: 'Quicksand', sans-serif;
+  // margin: 0;
+  // padding: 0;
+  // overflow-y: scroll;
+}
+
+
+
+// transition-duration: .4s;
+// transition: transform 0.35s;
+// .back::after {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   height: 100%;
+//   width: 100%;
+// // background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+
+//   background: linear-gradient(to bottom, transparent, white);
+// }
+
+// .back::after {
+//   content: '';
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   height: 20px;
+//   -webkit-box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+//   -moz-box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+//   box-shadow: 0px 10px 30px 0 rgba(0, 0, 0, 0.75);
+// }
+
+// .backgroundDetails {
+// background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+// }
