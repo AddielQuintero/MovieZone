@@ -15,7 +15,7 @@ export const NavBar = ({ navigation }: { navigation: NavigateProps }) => {
           <div className="flex">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">MovieZone</span>
-              <Typography variant="h6" className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400">
+              <Typography variant="h4" className="mr-2 font-bold text-pink-400 cursor-pointer">
                 MovieZone
               </Typography>
             </Link>
