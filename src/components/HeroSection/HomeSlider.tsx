@@ -75,29 +75,31 @@ export const HomeSlider = () => {
   console.log('home__slider')
 
   return (
-    <div className="home__slider ">
+    <div className="home__slider">
       <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
         {data.map((movie, index) => (
           <HomeHero key={index} movie={movie} />
         ))}
       </Slider>
 
-      <Slider
-        {...settingsNav}
-        className="slider-nav absolute w-full bottom-4 px-5 sm:px-10 md:px-12 xl:px-20 2xl:px-48"
-        asNavFor={nav1}
-        ref={slider2Ref}
-      >
-        {data.map((item, index) => (
-          <MovieBackgroundImage
-            className="item flex gap-2 h-36 px-2 pt-8 cursor-pointer overflow-hidden transform transition-all duration-[.35s]"
-            classImage="rounded-2xl "
-            classImageReflection="item__reflection"
-            key={index}
-            url={item.linkImg}
-          />
-        ))}
-      </Slider>
+      <div className='h-0'>
+        <Slider
+          {...settingsNav}
+          className="slider-nav -translate-y-full w-full -top-1 px-5 sm:px-10 md:px-12 xl:px-20 2xl:px-48"
+          asNavFor={nav1}
+          ref={slider2Ref}
+        >
+          {data.map((item, index) => (
+            <MovieBackgroundImage
+              className="item flex gap-2 h-36 px-2 pt-8 cursor-pointer overflow-hidden transform transition-all duration-[.35s]"
+              classImage="rounded-2xl "
+              classImageReflection="item__reflection"
+              key={index}
+              url={item.linkImg}
+            />
+          ))}
+        </Slider>
+      </div>
     </div>
   )
 }

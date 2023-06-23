@@ -5,7 +5,7 @@ import { MovieProps } from '@types'
 
 export const HomeHero = ({ movie }: MovieProps) => {
   return (
-    <div className="home__hero flex items-center h-[calc(100vh-50px)] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
+    <div className="home__hero flex items-center h-[calc(100vh-50px)] min-h-[620px] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
       <MovieBackgroundImage
         url={movie.linkImg}
         classImage="object-cover"
@@ -21,7 +21,7 @@ export const HomeHero = ({ movie }: MovieProps) => {
           <Typography className="text-3xl font-bold tracking-tight text-gray-800 md:text-5xl" variant="h3">
             {movie.title}
           </Typography>
-          <Typography className="hidden sm:block pt-4 text-lg leading-8 text-gray-800" variant="paragraph">
+          <Typography className="pt-4 text-lg leading-8 !line-clamp-2 sm:!block text-gray-800" variant="paragraph">
             {movie.description}
           </Typography>
           <div className="pt-3 sm:pt-6 flex items-center gap-x-6">
