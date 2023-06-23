@@ -23,4 +23,7 @@ export default defineConfig({
       '@sass': path.resolve(__dirname, 'src/sass'),
     },
   },
+  server: {
+    host: true
+  }
 })

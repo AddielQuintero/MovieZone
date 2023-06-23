@@ -15,10 +15,16 @@
   padding-top: 0;
 }
 
+.layout .absolute.backdrop-blur-sm {
+  position: fixed;
+}
+
+.container__drawer::-webkit-scrollbar {
+  display: none;
+}
 // .slick-slide.slick-active {
 //   z-index: 10;
 // }
-
 
 // .item,
 // .item__reflection img {
