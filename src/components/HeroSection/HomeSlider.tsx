@@ -75,7 +75,7 @@ export const HomeSlider = () => {
   console.log('home__slider')
 
   return (
-    <div className="home__slider">
+    <section className="home__slider">
       <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
         {data.map((movie, index) => (
           <HomeHero key={index} movie={movie} />
@@ -100,6 +100,6 @@ export const HomeSlider = () => {
           ))}
         </Slider>
       </div>
-    </div>
+    </section>
   )
 }

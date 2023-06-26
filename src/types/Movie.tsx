@@ -1,5 +1,5 @@
 import { ClassNameProps } from '@types'
-
+import { colors } from '@material-tailwind/react/types/generic'
 export interface TMovie {
   id: number
   title: string
@@ -19,6 +19,14 @@ export interface MovieListProps {
   movies?: TMovie[]
 }
 
+export interface MovieCardProps extends ClassNameProps {
+  classHeader?: string
+  classFooter?: string
+  classLink?: string
+  color?: colors
+  textFooter: string
+}
+
 export interface MovieInfoProps extends ClassNameProps {
   start: string
   time: string
@@ -27,6 +35,31 @@ export interface MovieInfoProps extends ClassNameProps {
 export interface MovieImageProps extends ClassNameProps {
   url?: string
 }
+
+export interface MovieCategoriesProps extends ClassNameProps {
+  categories: string[]
+}
+
+export const categories = [
+  'Action',
+  'Thriller',
+  'Crime',
+  'Comedy',
+  'Adventure',
+  'War',
+  'Documentary',
+  'Drama',
+  'Family',
+  'Fantasy',
+  'History',
+  'Horror',
+  'Music',
+  'Mystery',
+  'Romance',
+  'TV Movie',
+  'Science Fiction',
+  'Wester',
+]
 
 export const data = [
   {

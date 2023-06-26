@@ -4,7 +4,7 @@ import { LinkButton, MovieCategories, MovieImage, MovieInfo, IconicButton } from
 import { MovieProps } from '@types'
 
 export const MovieDetail = ({ movie }: MovieProps) => {
-  console.log('🚀  movieMovieDetail:', movie)
+  // console.log('🚀  movieMovieDetail:', movie)
 
   return (
     <div className="movie__detail grid grid-cols-1 md:grid-cols-3 place-items-center gap-6 max-w-[992px] mx-auto py-10 md:py-20">
@@ -42,7 +42,11 @@ export const MovieDetail = ({ movie }: MovieProps) => {
           />
         </div>
 
-        <MovieCategories categories={movie.categories} />
+        <MovieCategories
+          classListCategories="flex items-end gap-2 pt-2"
+          variant="h4"
+          categories={movie.categories}
+        />
       </div>
     </div>
   )

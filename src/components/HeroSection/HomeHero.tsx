@@ -21,7 +21,7 @@ export const HomeHero = ({ movie }: MovieProps) => {
           <Typography className="text-3xl font-bold tracking-tight text-gray-800 md:text-5xl" variant="h3">
             {movie.title}
           </Typography>
-          <Typography className="pt-4 text-lg leading-8 !line-clamp-2 sm:!block text-gray-800" variant="paragraph">
+          <Typography className="pt-4 text-lg leading-8 hidden sm:line-clamp-3 text-gray-800 max-w-[25rem]" variant="paragraph">
             {movie.description}
           </Typography>
           <div className="pt-3 sm:pt-6 flex items-center gap-x-6">
