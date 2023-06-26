@@ -6,6 +6,8 @@ export interface ClassNameProps {
   classTypography?: string
   classImage?: string
   classImageReflection?: string
+  classListCategories?: string
+  variant?: string
 }
 
 export interface LinkButtonProps extends ClassNameProps {
