@@ -1,4 +1,5 @@
 export * from './MovieBackgroundImage';
-export * from './MovieCategories';
+export * from './MovieGenreSkeleton';
+export * from './MovieGenres';
 export * from './MovieImage';
 export * from './MovieInfo';

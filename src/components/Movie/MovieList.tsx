@@ -1,11 +1,10 @@
 import { Typography } from '@material-tailwind/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-// import { Scrollbar } from 'swiper'
-import { MovieCard, LinkButton } from '@components'
+import { MovieCard, LinkButton, MovieListSkeleton } from '@components'
 import { MovieListProps } from '@types'
 import 'swiper/swiper-bundle.min.css'
 
-export const MovieList = ({ title, redirect }: MovieListProps) => {
+export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
   return (
     <div className="movie__list ">
       <div className="flex justify-between items-center mb-2">
@@ -21,22 +20,29 @@ export const MovieList = ({ title, redirect }: MovieListProps) => {
           />
         )}
       </div>
-      {/* <div> */}
+
       <Swiper grabCursor={true} spaceBetween={10} slidesPerView={'auto'}>
-        {Array(10)
-          .fill({})
-          .map((_, index) => (
-            <SwiperSlide className="w-[43%] sm:w-[30%] lg:w-[23%] xl:w-[18%]" key={index}>
-              <MovieCard
-                className="test bg-inherit relative grid  w-full h-full rounded-none items-end overflow-hidden text-center"
-                classHeader="relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-[url('https://image.tmdb.org/t/p/original//vZloFAK7NmvMGKE7VkF5UHaz0I.jpg')] bg-cover"
-                classFooter="flex items-center justify-between w-full p-2"
-                textFooter='2023'
-              />
-            </SwiperSlide>
-          ))}
+        {!movies.length ? (
+          <MovieListSkeleton value={10} />
+        ) : (
+          movies.map(
+            (movie, index) =>
+              (movie.backdrop_path || movie.poster_path) && (
+                <SwiperSlide className="w-[43%] sm:w-[30%] lg:w-[23%] xl:w-[18%]" key={index}>
+                  <MovieCard
+                    id={movie.id}
+                    bg={movie.poster_path ? movie.poster_path : movie.backdrop_path}
+                    title={movie.title}
+                    className="test bg-inherit relative grid w-full h-full rounded-none items-end overflow-hidden"
+                    classHeader={`relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-cover`}
+                    classTypography="text-sm"
+                    classFooter="flex items-start justify-between w-full py-2 px-1 gap-2"
+                  />
+                </SwiperSlide>
+              )
+          )
+        )}
       </Swiper>
-      {/* </div> */}
     </div>
   )
 }
