@@ -52,7 +52,7 @@ export const HomeSlider = () => {
     fade: true,
     dots: false,
     arrows: false,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: true,
     beforeChange: () => handleCurrentSlide(0),
