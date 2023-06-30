@@ -1,7 +1,6 @@
 import { MovieImageProps } from '@types'
 
 export const MovieBackgroundImage = ({ url, className, classImage, classImageReflection,}: MovieImageProps) => {
-
   return (
     <>
       <div className={className}>
