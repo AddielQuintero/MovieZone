@@ -1,125 +1,154 @@
 import { ClassNameProps } from '@types'
 import { colors } from '@material-tailwind/react/types/generic'
+
 export interface TMovie {
+  adult: boolean
+  backdrop_path: string
+  genre_ids: number[]
   id: number
+  media_type?: MediaType
+  original_language: OriginalLanguage
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  release_date: string
   title: string
-  start: string
-  time: string
-  categories: string[]
-  linkImg: string
-  description: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+}
+
+export interface TMovieDetail {
+  adult: boolean
+  backdrop_path: string
+  belongs_to_collection: BelongsToCollection
+  budget: number
+  genres: Genre[]
+  homepage: string
+  id: number
+  imdb_id: string
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
+  release_date: string
+  revenue: number
+  runtime: number
+  spoken_languages: SpokenLanguage[]
+  status: string
+  tagline: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
 }
 
 export interface MovieProps {
-  movie: TMovie
+  movies: TMovie
 }
+
+export interface MovieDetailProps {
+  detailMovie: TMovieDetail
+}
+
+export interface MoviePremierProps extends ClassNameProps {
+  ratedMovie: TMovie[]
+}
+
 export interface MovieListProps {
   title: string
   redirect?: string
-  movies?: TMovie[]
+  movies: TMovie[]
+}
+
+export interface MovieGridProps {
+  category: string
+  movies: TMovie[]
 }
 
 export interface MovieCardProps extends ClassNameProps {
+  id: number
+  bg: string
+  title?: string
+  // date?: string
   classHeader?: string
   classFooter?: string
   classLink?: string
   color?: colors
-  textFooter: string
 }
 
 export interface MovieInfoProps extends ClassNameProps {
-  start: string
-  time: string
+  average: number
+  runtime?: string
+  date: string
 }
 
 export interface MovieImageProps extends ClassNameProps {
   url?: string
+  poster_path?: string
+  backdrop_path?: string
 }
 
-export interface MovieCategoriesProps extends ClassNameProps {
-  categories: string[]
+export interface MovieGenreProps extends ClassNameProps {
+  genres: Genre[]
 }
 
-export const categories = [
-  'Action',
-  'Thriller',
-  'Crime',
-  'Comedy',
-  'Adventure',
-  'War',
-  'Documentary',
-  'Drama',
-  'Family',
-  'Fantasy',
-  'History',
-  'Horror',
-  'Music',
-  'Mystery',
-  'Romance',
-  'TV Movie',
-  'Science Fiction',
-  'Wester',
-]
+export interface TGenre {
+  id: number
+  name: string
+}
 
-export const data = [
-  {
-    id: 1,
-    title: 'John Wick: Chapter 4',
-    start: '7.9',
-    time: '2h 50m',
-    categories: ['Action', 'Thriller', 'Crime'],
-    linkImg: 'https://image.tmdb.org/t/p/original//1inZm0xxXrpRfN0LxwE2TXzyLN6.jpg',
-    description:
-      'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-  },
-  {
-    id: 2,
-    title: 'The Super Mario Bros - Movie',
-    start: '7.3',
-    time: '1h 35m',
-    categories: ['Animation', 'Adventure'],
-    linkImg: 'https://image.tmdb.org/t/p/original//9n2tJBplPbgR2ca05hS5CKXwP2c.jpg',
-    description:
-      "A Brooklyn Plumber named Mario, travels through the Mushroom Kingdom with a Princess named Peach and an Anthropomorphic Mushroom named Toad to find Mario's Brother, Luigi, and to save the world from a ruthless fire breathing Koopa named Bowser",
-  },
-  {
-    id: 3,
-    title: 'Extraction 2',
-    start: '7.9',
-    time: '2h 02m',
-    categories: ['Action', 'Thriller'],
-    linkImg: 'https://image.tmdb.org/t/p/original//wRxLAw4l17LqiFcPLkobriPTZAw.jpg',
-    description:
-      "Tasked with extracting a family who is at the mercy of a Georgian gangster, Tyler Rake infiltrates one of the world's deadliest prisons in order to save them. But when the extraction gets hot, and the gangster dies in the heat of battle, his equally ruthless brother tracks down Rake and his team to Sydney, in order to get revenge.",
-  },
-  {
-    id: 4,
-    title: 'The Flash',
-    start: '6.8',
-    time: '2h 23m',
-    categories: ['Action', 'Science Fiction', 'Adventure'],
-    linkImg: 'https://image.tmdb.org/t/p/original//7e9MVGg8efOhoA2R9XhZcGWTC5Z.jpg',
-    description:
-      "When his attempt to save his family inadvertently alters the future, Barry Allen becomes trapped in a reality in which General Zod has returned and there are no Super Heroes to turn to. In order to save the world that he is in and return to the future that he knows, Barry's only hope is to race for his life. But will making the ultimate sacrifice be enough to reset the universe?",
-  },
-  {
-    id: 5,
-    title: 'Fast X',
-    start: '7.3',
-    time: '2h 22m',
-    categories: ['Action', 'Thriller', 'Crime'],
-    linkImg: 'https://image.tmdb.org/t/p/original//6l1SV3CWkbbe0DcAK1lyOG8aZ4K.jpg',
-    description:
-      "Over many missions and against impossible odds, Dom Toretto and his family have outsmarted, out-nerved and outdriven every foe in their path. Now, they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge, and who is determined to shatter this family and destroy everything—and everyone—that Dom loves, forever.",
-  },
-  {
-    id: 6,
-    title: 'Transformers: Rise of the Beasts',
-    start: '7.2',
-    time: '2h 07m',
-    categories: ['Action', 'Adventure', 'Science Fiction'],
-    linkImg: 'https://image.tmdb.org/t/p/original//qWQSnedj0LCUjWNp9fLcMtfgadp.jpg',
-    description:
-      'When a new threat capable of destroying the entire planet emerges, Optimus Prime and the Autobots must team up with a powerful faction known as the Maximals. With the fate of humanity hanging in the balance, humans Noah and Elena will do whatever it takes to help the Transformers as they engage in the ultimate battle to save Earth.',
-  },
-]
+export interface GenreProps {
+  genres: TGenre[]
+}
+
+export enum MediaType {
+  Movie = 'movie',
+}
+
+export enum OriginalLanguage {
+  En = 'en',
+  Es = 'es',
+  Ja = 'ja',
+}
+
+export interface BelongsToCollection {
+  backdrop_path: string
+  id: number
+  name: string
+  poster_path: string
+}
+
+export interface Genre {
+  id: number
+  name: string
+}
+
+export interface ProductionCompany {
+  id: number
+  logo_path: null | string
+  name: string
+  origin_country: string
+}
+
+export interface ProductionCountry {
+  iso_3166_1: string
+  name: string
+}
+
+export interface SpokenLanguage {
+  english_name: string
+  iso_639_1: string
+  name: string
+}
+
+export interface MovieSkeleton {
+  reflection?: boolean
+  // homeHero?: boolean
+  detail?: boolean
+
+}

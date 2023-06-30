@@ -6,7 +6,7 @@ export interface ClassNameProps {
   classTypography?: string
   classImage?: string
   classImageReflection?: string
-  classListCategories?: string
+  classListGenres?: string
   variant?: string
 }
 
