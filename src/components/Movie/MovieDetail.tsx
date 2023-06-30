@@ -1,14 +1,17 @@
 import { Typography } from '@material-tailwind/react'
 import { PlayIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid'
-import { LinkButton, MovieCategories, MovieImage, MovieInfo, IconicButton } from '@components'
-import { MovieProps } from '@types'
+import { LinkButton, MovieGenres, MovieImage, MovieInfo, IconicButton } from '@components'
+import { MovieDetailProps } from '@types'
+import { formatRuntime } from '@utilities'
 
-export const MovieDetail = ({ movie }: MovieProps) => {
-  // console.log('🚀  movieMovieDetail:', movie)
+export const MovieDetail = ({ detailMovie }: MovieDetailProps) => {
+  const formattedDate = detailMovie.release_date.slice(0, 4)
+  const formattedRuntime = formatRuntime(detailMovie.runtime)
 
   return (
+    // <div></div>
     <div className="movie__detail grid grid-cols-1 md:grid-cols-3 place-items-center gap-6 max-w-[992px] mx-auto py-10 md:py-20">
-      <MovieImage url={movie.linkImg} />
+      <MovieImage poster_path={detailMovie.poster_path} backdrop_path={detailMovie.backdrop_path} />
 
       <div className="summary flex flex-col h-full col-span-2">
         <div className="hidden md:flex justify-end pb-10">
@@ -21,14 +24,14 @@ export const MovieDetail = ({ movie }: MovieProps) => {
             IconComponent={ArrowLongLeftIcon}
           />
         </div>
-        <MovieInfo start={movie.start} time={movie.time} />
+        <MovieInfo average={detailMovie.vote_average} runtime={formattedRuntime} date={formattedDate} />
 
         <div className="my-2">
           <Typography className="" variant="h4">
-            {movie.title}
+            {detailMovie.title}
           </Typography>
           <Typography className="mt-4" variant="paragraph">
-            {movie.description}
+            {detailMovie.overview}
           </Typography>
         </div>
 
@@ -42,10 +45,10 @@ export const MovieDetail = ({ movie }: MovieProps) => {
           />
         </div>
 
-        <MovieCategories
-          classListCategories="flex items-end gap-2 pt-2"
+        <MovieGenres
+          classListGenres="flex items-end flex-wrap gap-2 pt-2"
           variant="h4"
-          categories={movie.categories}
+          genres={detailMovie.genres}
         />
       </div>
     </div>

@@ -2,23 +2,26 @@ import { Card, CardHeader, CardFooter, Typography, IconButton } from '@material-
 import { HeartIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { MovieCardProps } from '@types'
+import { CONFIG } from '@config'
 
-export const MovieCard = ({ className, classHeader, classFooter, classLink, classTypography, color, textFooter }: MovieCardProps) => {
+export const MovieCard = ({ id, bg, title, className, classHeader, classFooter, classLink, classTypography, color }: MovieCardProps) => {
+  const background = CONFIG.w500Image(bg)
+
   return (
     <Card shadow={false} className={className}>
-      <Link to={`/movies/category/${1}`} className={classLink}>
+      <Link to={`/movies/category/${id}`} className={classLink}>
         <CardHeader
           floated={false}
           shadow={false}
           children={false}
-          color={color}        
+          color={color}
           className={classHeader}
-          // style={{backgroundImage: "url('https://image.tmdb.org/t/p/original//1inZm0xxXrpRfN0LxwE2TXzyLN6.jpg')", backgroundSize: "cover"}}
+          style={{ backgroundImage: `url('${background}')` }}
         />
       </Link>
 
       <CardFooter className={classFooter}>
-        <Typography className={classTypography}>{textFooter}</Typography>
+        <Typography className={classTypography}>{title}</Typography>
         <IconButton variant="text" color="white" className="h-5 w-5">
           <HeartIcon className="h-5 w-5 text-indigo-500" />
         </IconButton>
