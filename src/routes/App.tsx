@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Categories, Favorites, Home, NotFound, DetailPage, MovieGridPage } from '@pages'
+import { Categories, Favorites, Home, NotFound, MovieDetailPage, MovieGridPage } from '@pages'
 import { Footer, Layout } from '@components'
 
 export const App = () => {
@@ -12,7 +12,7 @@ export const App = () => {
             <Route path="/categories" element={<Categories />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/movies/:category" element={<MovieGridPage />} />
-            <Route path="/movies/:category/:id" element={<DetailPage />} />
+            <Route path="/movies/:category/:id" element={<MovieDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
