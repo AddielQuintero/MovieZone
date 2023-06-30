@@ -1,3 +1,5 @@
+import { Provider } from 'react-redux'
+import { store } from '@redux'
 import { NavBar } from '@components'
 import { navigation } from '@types'
 
@@ -7,10 +9,11 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className='layout'>
-      <NavBar navigation={navigation} />
-      {/* <div className="container mx-auto mt-5 px-5 pb-5 sm:p-5"> */}
-      {children}
-    </div>
+    <Provider store={store}>
+      <div className="layout">
+        <NavBar navigation={navigation} />
+        {children}
+      </div>
+    </Provider>
   )
 }
