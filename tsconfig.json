@@ -34,6 +34,7 @@
       "@hooks": ["src/hooks/"],
       "@config": ["src/config/"],
       "@types": ["src/types/"],
+      "@utilities": ["src/utilities/"],
       "@public": ["public/"],
       "@assets": ["src/assets/"],
       "@sass": ["src/sass/"]
