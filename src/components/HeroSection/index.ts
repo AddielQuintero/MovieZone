@@ -1,2 +1,3 @@
-export * from './HomeHero'
-export * from './HomeSlider'
+export * from './HomeHero';
+export * from './HomeHeroSkeleton';
+export * from './HomeSlider';

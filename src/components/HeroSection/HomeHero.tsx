@@ -1,13 +1,17 @@
 import { IconicButton, LinkButton, MovieBackgroundImage, MovieInfo } from '@components'
 import { PlayIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import { Typography } from '@material-tailwind/react'
+import { CONFIG } from '@config'
 import { MovieProps } from '@types'
 
-export const HomeHero = ({ movie }: MovieProps) => {
+export const HomeHero = ({ movies }: MovieProps) => {
+  const background = CONFIG.originalImage(movies.backdrop_path)
+  const formattedDate = movies.release_date.slice(0, 4)
+  // const formattedDate = movies.release_date.replace(/-/g, ' ')
   return (
     <div className="home__hero flex items-center h-[calc(100vh-50px)] min-h-[620px] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
       <MovieBackgroundImage
-        url={movie.linkImg}
+        url={background}
         classImage="object-cover"
         className="BackgroundImage absolute top-0 left-0 inset-0 -z-10 h-full w-full "
       />
@@ -15,14 +19,21 @@ export const HomeHero = ({ movie }: MovieProps) => {
 
       <div className="relative max-w-2xl ">
         <div className="sm:mb-8 flex">
-          <MovieInfo start={movie.start} time={movie.time} className="text-gray-800 font-bold" />
+          <MovieInfo
+            average={movies.vote_average}
+            date={formattedDate}
+            className="text-gray-800 font-bold"
+          />
         </div>
         <div className="mt-2">
           <Typography className="text-3xl font-bold tracking-tight text-gray-800 md:text-5xl" variant="h3">
-            {movie.title}
+            {movies.title}
           </Typography>
-          <Typography className="pt-4 text-lg leading-8 hidden sm:line-clamp-3 text-gray-800 max-w-[25rem]" variant="paragraph">
-            {movie.description}
+          <Typography
+            className="pt-4 text-lg leading-8 hidden sm:line-clamp-3 text-gray-800 max-w-[25rem]"
+            variant="paragraph"
+          >
+            {movies.overview}
           </Typography>
           <div className="pt-3 sm:pt-6 flex items-center gap-x-6">
             <div className="py-4">
@@ -39,7 +50,7 @@ export const HomeHero = ({ movie }: MovieProps) => {
               classIcon="h-5 w-5"
               classTypography="hidden sm:block font-bold"
               title="Detail"
-              redirect={`/movies/category/${movie.id}`}
+              redirect={`/movies/category/${movies.id}`}
               IconComponent={InformationCircleIcon}
             />
           </div>

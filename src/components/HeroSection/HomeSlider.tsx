@@ -1,26 +1,49 @@
 import Slider from 'react-slick'
 import { useEffect, useRef, useState } from 'react'
-import { data } from '@types'
-import { HomeHero, MovieBackgroundImage } from '@components'
+import { TStore } from '@types'
+import { HomeHero, HomeHeroSkeleton, MovieBackgroundImage } from '@components'
+import { CONFIG } from '@config'
+import { tmdbService } from '@services'
+import { setLoading, setNowPlayingMovies, useAppDispatch } from '@redux'
+import { useSelector } from 'react-redux'
 
 export const HomeSlider = () => {
+  const nowPlaying = useSelector((state: TStore) => state.data.nowPlaying)
+
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
   const slider1Ref = useRef(null)
   const slider2Ref = useRef(null)
+  const dispatch = useAppDispatch()
+
+  const fetchTopRated = async () => {
+    const topRated = await tmdbService.getNowPlayingMovies()
+    topRated.success && dispatch(setNowPlayingMovies(topRated.movies))
+    dispatch(setLoading(false))
+  }
+
+  // const loadCurrentSlide = () => {
+  //   if (document.readyState === 'complete') {
+  //     handleCurrentSlide(10)
+  //   }
+  // }
 
   const handleCurrentSlide = (value: number) => {
     const currentSlide = document.querySelector('.slider-for .slick-active.slick-current') as HTMLElement
     currentSlide.style.zIndex = `${value}`
   }
+  useEffect(() => {
+    fetchTopRated()
+  }, [])
 
   useEffect(() => {
     if (slider1Ref.current && slider2Ref.current) {
       setNav1(slider1Ref.current)
       setNav2(slider2Ref.current)
+      // document.addEventListener('DOMContentLoaded', loadCurrentSlide)
       handleCurrentSlide(10)
     }
-  }, [])
+  }, [nowPlaying])
 
   const settingsFor = {
     slidesToShow: 1,
@@ -29,7 +52,7 @@ export const HomeSlider = () => {
     fade: true,
     dots: false,
     arrows: false,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: true,
     beforeChange: () => handleCurrentSlide(0),
@@ -72,34 +95,38 @@ export const HomeSlider = () => {
     ],
   }
 
-  console.log('home__slider')
-
   return (
     <section className="home__slider">
-      <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
-        {data.map((movie, index) => (
-          <HomeHero key={index} movie={movie} />
-        ))}
-      </Slider>
+      {!nowPlaying.length ? (
+        <HomeHeroSkeleton reflection/>
+      ) : (
+        <>
+          <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
+            {nowPlaying.map((movie, index) => (
+              <HomeHero key={index} movies={movie} />
+            ))}
+          </Slider>
 
-      <div className='h-0'>
-        <Slider
-          {...settingsNav}
-          className="slider-nav -translate-y-full w-full -top-1 px-5 sm:px-10 md:px-12 xl:px-20 2xl:px-48"
-          asNavFor={nav1}
-          ref={slider2Ref}
-        >
-          {data.map((item, index) => (
-            <MovieBackgroundImage
-              className="item flex gap-2 h-36 px-2 pt-8 cursor-pointer overflow-hidden transform transition-all duration-[.35s]"
-              classImage="rounded-2xl "
-              classImageReflection="item__reflection"
-              key={index}
-              url={item.linkImg}
-            />
-          ))}
-        </Slider>
-      </div>
+          <div className="h-0">
+            <Slider
+              {...settingsNav}
+              className="slider-nav -translate-y-full w-full -top-1 px-5 sm:px-10 md:px-12 xl:px-20 2xl:px-48"
+              asNavFor={nav1}
+              ref={slider2Ref}
+            >
+              {nowPlaying.map((movie, index) => (
+                <MovieBackgroundImage
+                  className="item flex gap-2 h-36 px-2 pt-8 cursor-pointer overflow-hidden transform transition-all duration-[.35s]"
+                  classImage="rounded-2xl "
+                  classImageReflection="item__reflection"
+                  key={index}
+                  url={CONFIG.originalImage(movie.backdrop_path)}
+                />
+              ))}
+            </Slider>
+          </div>
+        </>
+      )}
     </section>
   )
 }
