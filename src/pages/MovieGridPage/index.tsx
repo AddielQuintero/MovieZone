@@ -23,11 +23,11 @@ export const MovieGridPage = () => {
           response.success && dispatch(setTrendingMovies(response.movies))
           break
         case 'popular':
-          response = await tmdbService.getPopularMovies()
+          response = await tmdbService.getListMovies('popular')
           response.success && dispatch(setPopularMovies(response.movies))
           break
         case 'upcoming':
-          response = await tmdbService.getUpcomingMovies()
+          response = await tmdbService.getListMovies('upcoming')
           response.success && dispatch(setUpcomingMovies(response.movies))
           break
       }

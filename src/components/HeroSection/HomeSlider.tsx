@@ -17,7 +17,7 @@ export const HomeSlider = () => {
   const dispatch = useAppDispatch()
 
   const fetchTopRated = async () => {
-    const topRated = await tmdbService.getNowPlayingMovies()
+    const topRated = await tmdbService.getListMovies('now_playing', 1, 7)
     topRated.success && dispatch(setNowPlayingMovies(topRated.movies))
     dispatch(setLoading(false))
   }
@@ -98,7 +98,7 @@ export const HomeSlider = () => {
   return (
     <section className="home__slider">
       {!nowPlaying.length ? (
-        <HomeHeroSkeleton reflection/>
+        <HomeHeroSkeleton reflection />
       ) : (
         <>
           <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">

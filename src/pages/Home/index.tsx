@@ -16,10 +16,10 @@ export const Home = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const topRatedFetch = await tmdbService.getTopRatedMovies()
+      const topRatedFetch = await tmdbService.getListMovies('top_rated', 0, 4)
       const trendingFetch = await tmdbService.getTrendingMovies()
-      const popularFetch = await tmdbService.getPopularMovies()
-      const upcomingFetch = await tmdbService.getUpcomingMovies()
+      const popularFetch = await tmdbService.getListMovies('popular', 0, 10)
+      const upcomingFetch = await tmdbService.getListMovies('upcoming', 0, 10)
       const genreFetch = await tmdbService.getGenreMovies()
       topRatedFetch.success && dispatch(setTopRatedMovies(topRatedFetch.movies))
       trendingFetch.success && dispatch(setTrendingMovies(trendingFetch.movies))
