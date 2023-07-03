@@ -152,3 +152,19 @@ export interface MovieSkeleton {
   detail?: boolean
 
 }
+
+export interface TMovieType {
+  upcoming: string;
+  popular: string;
+  top_rated: string;
+  now_playing: string;
+  trending: string;
+}
+
+export const MovieType: TMovieType = {
+  upcoming: 'upcoming',
+  popular: 'popular',
+  top_rated: 'top_rated',
+  now_playing: 'now_playing',
+  trending: 'week',
+}
