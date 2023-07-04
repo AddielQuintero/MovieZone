@@ -15,7 +15,7 @@ export const Home = () => {
 
   const fetch = async () => {
     const topRatedFetch = await tmdbService.getListMovies('top_rated', 0, 4)
-    const trendingFetch = await tmdbService.getTrendingMovies()
+    const trendingFetch = await tmdbService.getTrendingMovies(0, 10)
     const popularFetch = await tmdbService.getListMovies('popular', 0, 10)
     const upcomingFetch = await tmdbService.getListMovies('upcoming', 0, 10)
     const genreFetch = await tmdbService.getGenreMovies()

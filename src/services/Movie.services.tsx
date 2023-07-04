@@ -11,10 +11,10 @@ export const tmdbService = {
     }
   },
 
-  getTrendingMovies: async () => {
+  getTrendingMovies: async (sliceStart?: number, sliceEnd?: number) => {
     try {
       const reply = await axiosClient(`/trending/movie/week`)
-      return { success: true, movies: reply.data.results.slice(0, 10) }
+      return { success: true, movies: reply.data.results.slice(sliceStart, sliceEnd) }
     } catch {
       return { success: false, movies: [] }
     }
