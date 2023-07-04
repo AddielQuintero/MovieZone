@@ -11,24 +11,25 @@ export const Home = () => {
   const popular = useSelector((state: TStore) => state.data.popular)
   const upcoming = useSelector((state: TStore) => state.data.upcoming)
   const genres = useSelector((state: TStore) => state.data.genre)
-
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    const fetch = async () => {
-      const topRatedFetch = await tmdbService.getListMovies('top_rated', 0, 4)
-      const trendingFetch = await tmdbService.getTrendingMovies()
-      const popularFetch = await tmdbService.getListMovies('popular', 0, 10)
-      const upcomingFetch = await tmdbService.getListMovies('upcoming', 0, 10)
-      const genreFetch = await tmdbService.getGenreMovies()
-      topRatedFetch.success && dispatch(setTopRatedMovies(topRatedFetch.movies))
-      trendingFetch.success && dispatch(setTrendingMovies(trendingFetch.movies))
-      popularFetch.success && dispatch(setPopularMovies(popularFetch.movies))
-      upcomingFetch.success && dispatch(setUpcomingMovies(upcomingFetch.movies))
-      genreFetch.success && dispatch(setGenreMovies(genreFetch.movies))
-    }
+  const fetch = async () => {
+    const topRatedFetch = await tmdbService.getListMovies('top_rated', 0, 4)
+    const trendingFetch = await tmdbService.getTrendingMovies()
+    const popularFetch = await tmdbService.getListMovies('popular', 0, 10)
+    const upcomingFetch = await tmdbService.getListMovies('upcoming', 0, 10)
+    const genreFetch = await tmdbService.getGenreMovies()
+    topRatedFetch.success && dispatch(setTopRatedMovies(topRatedFetch.movies))
+    trendingFetch.success && dispatch(setTrendingMovies(trendingFetch.movies))
+    popularFetch.success && dispatch(setPopularMovies(popularFetch.movies))
+    upcomingFetch.success && dispatch(setUpcomingMovies(upcomingFetch.movies))
+    genreFetch.success && dispatch(setGenreMovies(genreFetch.movies))
+  }
 
+  useEffect(() => {
     fetch()
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
   return (
@@ -44,9 +45,11 @@ export const Home = () => {
           <MovieGenres
             className="genres"
             classTypography="mb-2 py-1.5 font-bold text-pink-400"
-            variant="h3"
             classListGenres="flex flex-wrap gap-3"
+            classChip="bg-blue-gray-800 cursor-pointer"
+            variant="h3"
             genres={genres}
+            redirect
           />
           <MoviePremier
             ratedMovie={topRated}

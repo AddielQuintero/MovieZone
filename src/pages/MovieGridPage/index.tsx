@@ -39,6 +39,7 @@ export const MovieGridPage = () => {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     fetch()
   }, [category])
 
