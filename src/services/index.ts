@@ -1,1 +1,2 @@
-export * from './Movie.services';
+export * from './Movie.services'
+export * from './axiosClient'

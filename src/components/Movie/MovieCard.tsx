@@ -9,7 +9,7 @@ export const MovieCard = ({ id, bg, title, className, classHeader, classFooter, 
 
   return (
     <Card shadow={false} className={className}>
-      <Link to={`/movies/category/${id}`} className={classLink}>
+      <Link to={`/movie/${id}`} className={classLink}>
         <CardHeader
           floated={false}
           shadow={false}

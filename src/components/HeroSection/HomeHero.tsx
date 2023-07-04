@@ -50,7 +50,7 @@ export const HomeHero = ({ movies }: MovieProps) => {
               classIcon="h-5 w-5"
               classTypography="hidden sm:block font-bold"
               title="Detail"
-              redirect={`/movies/category/${movies.id}`}
+              redirect={`/movie/${movies.id}`}
               IconComponent={InformationCircleIcon}
             />
           </div>

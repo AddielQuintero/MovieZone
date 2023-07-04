@@ -17,16 +17,16 @@ export const MovieDetailPage = () => {
 
   if (!movie || !id) return <NotFound />
 
+  const fetch = async () => {
+    const detailMovie = await tmdbService.getDetailMovies(+id)
+    const similarMovie = await tmdbService.getSimilarMovies(+id)
+    detailMovie.success && dispatch(setDetailMovies(detailMovie.movies))
+    similarMovie.success && dispatch(setSimilarMovies(similarMovie.movies))
+  }
+
   useEffect(() => {
-    const fetch = async () => {
-      const detailMovie = await tmdbService.getDetailMovies(+id)
-      const similarMovie = await tmdbService.getSimilarMovies(+id)
-      detailMovie.success && dispatch(setDetailMovies(detailMovie.movies))
-      similarMovie.success && dispatch(setSimilarMovies(similarMovie.movies))
-    }
-
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     fetch()
-
     return () => {
       dispatch(setDetailMovies({}))
       dispatch(setSimilarMovies([]))
