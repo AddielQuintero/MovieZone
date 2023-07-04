@@ -46,6 +46,7 @@ export const MovieDetail = ({ detailMovie }: MovieDetailProps) => {
         </div>
 
         <MovieGenres
+          classChip="bg-blue-gray-800"
           classListGenres="flex items-end flex-wrap gap-2 pt-2"
           variant="h4"
           genres={detailMovie.genres}

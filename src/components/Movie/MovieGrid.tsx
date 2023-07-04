@@ -5,6 +5,7 @@ import { MovieCard, MovieCardSkeleton } from '@components'
 import { MovieGridProps } from '@types'
 
 export const MovieGrid = ({ category, movies }: MovieGridProps) => {
+
   return (
     <section className="movie__grid gap-x-5 md:gap-x-9 lg:gap-x-12 w-full max-w-[1536px]  mx-auto mt-9 px-5 pb-5 sm:max-2xl:px-[5vw]">
       <div className="flex justify-between items-center mb-2">
