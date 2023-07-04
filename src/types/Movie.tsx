@@ -95,6 +95,8 @@ export interface MovieImageProps extends ClassNameProps {
 
 export interface MovieGenreProps extends ClassNameProps {
   genres: Genre[]
+  classChip?: string
+  redirect?: boolean
 }
 
 export interface TGenre {
@@ -150,15 +152,14 @@ export interface MovieSkeleton {
   reflection?: boolean
   // homeHero?: boolean
   detail?: boolean
-
 }
 
 export interface TMovieType {
-  upcoming: string;
-  popular: string;
-  top_rated: string;
-  now_playing: string;
-  trending: string;
+  upcoming: string
+  popular: string
+  top_rated: string
+  now_playing: string
+  trending: string
 }
 
 export const MovieType: TMovieType = {

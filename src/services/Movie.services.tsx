@@ -47,6 +47,16 @@ export const tmdbService = {
     }
   },
 
+  getMoviesByGenre: async (id: string) => {
+    console.log('🚀  idService:', id)
+    try {
+      const reply = await axiosClient(`discover/movie`, { params: { with_genres: id } })
+      return { success: true, movies: reply.data.results }
+    } catch {
+      return { success: false, movies: [] }
+    }
+  },
+
   // getPopularMovies: async () => {
   //   try {
   //     const reply = await axiosClient(`/movie/popular`)

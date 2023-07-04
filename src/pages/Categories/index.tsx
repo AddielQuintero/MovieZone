@@ -11,7 +11,7 @@ export const Categories = () => {
   const categoryID = id ? id : ''
 
   const fetch = async () => {
-    const reply = await tmdbService.getCategoriesMovies(categoryID)
+    const reply = await tmdbService.getMoviesByGenre(categoryID)
     setCategory(reply.movies)
   }
 
