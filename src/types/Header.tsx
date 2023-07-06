@@ -32,5 +32,5 @@ export const navigation: NavigateProps = [
   { name: 'Categories', to: '/categories', private: false },
   { name: 'Popular', to: '/movies/popular', private: false },
   { name: 'Upcoming', to: '/movies/upcoming', private: false },
-  { name: 'Favorites', to: '/movies/favorites', private: false },
+  { name: 'Favorites', to: '/favorites', private: false },
 ]
