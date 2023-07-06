@@ -43,13 +43,17 @@ export const Home = () => {
         </main>
         <aside className="movie__aside w-full lg:w-[22%] xl:w-[19%] 2xl:w-[17%] ">
           <MovieGenres
-            className="genres"
-            classTypography="mb-2 py-1.5 font-bold text-pink-400"
+            className="genres__home"
             classListGenres="flex flex-wrap gap-3"
+            classTypography="mb-2 py-1.5 font-bold text-pink-400"
             classChip="bg-blue-gray-800 cursor-pointer"
-            variant="h3"
+            classSkeleton="flex flex-wrap gap-4"
+            classItemSkeleton="genres__home-skeleton w-[5.5rem] sm:w-24  h-8 bg-gray-300 rounded"
             genres={genres}
+            variant="h3"
+            value={20}
             redirect
+            title
           />
           <MoviePremier
             ratedMovie={topRated}
