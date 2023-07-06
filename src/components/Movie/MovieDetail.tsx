@@ -20,7 +20,7 @@ export const MovieDetail = ({ detailMovie }: MovieDetailProps) => {
             classIcon="h-5 w-5 inline"
             classTypography="font-bold text-xs"
             title="Go Back"
-            redirect="/"
+            redirect="-1"
             IconComponent={ArrowLongLeftIcon}
           />
         </div>
@@ -46,10 +46,15 @@ export const MovieDetail = ({ detailMovie }: MovieDetailProps) => {
         </div>
 
         <MovieGenres
-          classChip="bg-blue-gray-800"
+          className="genres__detail"
           classListGenres="flex items-end flex-wrap gap-2 pt-2"
-          variant="h4"
+          classChip="bg-blue-gray-800"
+          classSkeleton="flex flex-wrap gap-4"
+          classItemSkeleton=" w-24 h-8 bg-gray-300 rounded"
           genres={detailMovie.genres}
+          variant="h4"
+          value={2}
+          title
         />
       </div>
     </div>

@@ -68,6 +68,9 @@ export interface MovieListProps {
 export interface MovieGridProps {
   category: string
   movies: TMovie[]
+  children?: React.ReactNode
+  loading: boolean
+  success?: boolean
 }
 
 export interface MovieCardProps extends ClassNameProps {
@@ -93,10 +96,11 @@ export interface MovieImageProps extends ClassNameProps {
   backdrop_path?: string
 }
 
-export interface MovieGenreProps extends ClassNameProps {
+export interface MovieGenreProps extends ClassNameProps, GenreSkeletonProps {
   genres: Genre[]
   classChip?: string
   redirect?: boolean
+  title?: boolean
 }
 
 export interface TGenre {
@@ -162,10 +166,22 @@ export interface TMovieType {
   trending: string
 }
 
+export type TSelectors = {
+  upcoming: TMovie[]
+  popular: TMovie[]
+  trending: TMovie[]
+}
+
 export const MovieType: TMovieType = {
   upcoming: 'upcoming',
   popular: 'popular',
   top_rated: 'top_rated',
   now_playing: 'now_playing',
   trending: 'week',
+}
+
+export interface GenreSkeletonProps {
+  value: number
+  classSkeleton: string
+  classItemSkeleton: string
 }
