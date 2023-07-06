@@ -26,6 +26,9 @@ export const DataSlice = createSlice({
     setGenreMovies: (state, action) => {
       state.genre = action.payload
     },
+    setByGenreMovies: (state, action) => {
+      state.byGenres = action.payload
+    },
     setNowPlayingMovies: (state, action) => {
       state.nowPlaying = action.payload
     },
@@ -43,6 +46,7 @@ export const {
   setDetailMovies,
   setTopRatedMovies,
   setGenreMovies,
+  setByGenreMovies,
   setNowPlayingMovies,
   setSimilarMovies,
 } = DataSlice.actions
