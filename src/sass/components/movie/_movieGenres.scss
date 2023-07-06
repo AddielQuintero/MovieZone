@@ -1,5 +1,23 @@
 @media (min-width: 885px) {
-  .genres__skeleton {
+  .genres__home-skeleton {
     width: 45%;
+  }
+}
+
+.genres__filter,
+.genres__filter--skeleton {
+  &::-webkit-scrollbar {
+    height: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(236 64 122);
+    border: 20px solid rgb(236 64 122);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #d1d5db;
+    border-radius: 3px;
   }
 }
