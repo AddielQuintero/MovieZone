@@ -33,10 +33,13 @@ export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
                     id={movie.id}
                     bg={movie.poster_path ? movie.poster_path : movie.backdrop_path}
                     title={movie.title}
-                    className="test bg-inherit relative grid w-full h-full rounded-none items-end overflow-hidden"
+                    className="test bg-inherit relative grid w-full h-full rounded-none items-end"
                     classHeader={`relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-cover`}
-                    classTypography="text-sm"
                     classFooter="flex items-start justify-between w-full py-2 px-1 gap-2"
+                    classTypography="text-sm"
+                    classButton="h-5 w-5"
+                    classIcon="h-5 w-5 text-indigo-500"
+
                   />
                 </SwiperSlide>
               )
