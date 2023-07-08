@@ -3,16 +3,22 @@ import { Chip, Typography } from '@material-tailwind/react'
 import { MovieGenreProps } from '@types'
 import { Link } from 'react-router-dom'
 
-export const MovieGenres = ({ genres, className, classListGenres, classTypography, classChip, redirect, variant, title, value, classSkeleton, classItemSkeleton }: MovieGenreProps) => {
+export const MovieGenres = ({ loading, genres, className, classListGenres, classTypography, classChip, redirect, variant, title, value, classSkeleton, classItemSkeleton }: MovieGenreProps) => {
+  const shouldShowTitle = title && (loading || genres.length > 0);
+
   return (
     <div className={className}>
-      {title && (
+      {shouldShowTitle &&(
         <Typography className={classTypography} variant={variant}>
           Categories
         </Typography>
       )}
-      {!genres.length ? (
-        <MovieGenreSkeleton value={value} classSkeleton={classSkeleton} classItemSkeleton={classItemSkeleton}/>
+      {!genres.length && loading ? (
+        <MovieGenreSkeleton
+          value={value}
+          classSkeleton={classSkeleton}
+          classItemSkeleton={classItemSkeleton}
+        />
       ) : (
         <div className={classListGenres}>
           {genres.map((genre, index) => (

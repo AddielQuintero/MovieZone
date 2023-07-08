@@ -53,6 +53,7 @@ export interface MovieProps {
 
 export interface MovieDetailProps {
   detailMovie: TMovieDetail
+  loading?: boolean
 }
 
 export interface MoviePremierProps extends ClassNameProps {
@@ -66,7 +67,8 @@ export interface MovieListProps {
 }
 
 export interface MovieGridProps {
-  category: string
+  category?: string
+  keyword?: string
   movies: TMovie[]
   children?: React.ReactNode
   loading: boolean
@@ -81,6 +83,8 @@ export interface MovieCardProps extends ClassNameProps {
   classHeader?: string
   classFooter?: string
   classLink?: string
+  classButton?: string
+  classIcon?: string
   color?: colors
 }
 
@@ -88,6 +92,7 @@ export interface MovieInfoProps extends ClassNameProps {
   average: number
   runtime?: string
   date: string
+  children?: React.ReactNode
 }
 
 export interface MovieImageProps extends ClassNameProps {
@@ -101,6 +106,7 @@ export interface MovieGenreProps extends ClassNameProps, GenreSkeletonProps {
   classChip?: string
   redirect?: boolean
   title?: boolean
+  loading?: boolean
 }
 
 export interface TGenre {
@@ -170,6 +176,7 @@ export type TSelectors = {
   upcoming: TMovie[]
   popular: TMovie[]
   trending: TMovie[]
+  bySearch: TMovie[]
 }
 
 export const MovieType: TMovieType = {
@@ -184,4 +191,11 @@ export interface GenreSkeletonProps {
   value: number
   classSkeleton: string
   classItemSkeleton: string
+}
+
+export interface MovieFavoriteProps {
+  classButton?: string
+  classIcon?: string
+  favorite: boolean
+  handleFavorite: () => void
 }

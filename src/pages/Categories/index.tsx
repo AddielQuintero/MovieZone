@@ -42,6 +42,7 @@ export const Categories = () => {
           classChip="bg-blue-gray-800 cursor-pointer"
           classSkeleton="genres__filter--skeleton grid grid-cols-[repeat(20,_minmax(6rem,_1fr))] gap-4 overflow-hidden overflow-x-auto"
           classItemSkeleton="w-full h-8 bg-gray-300 mb-5 rounded"
+          loading={loading}
           genres={genres}
           variant="h3"
           value={20}
