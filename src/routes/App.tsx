@@ -13,6 +13,7 @@ export const App = () => {
             <Route path="/categories/:id" element={<Categories />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/movies/:category" element={<MovieGridPage />} />
+            <Route path='/search/:keyword' element={<MovieGridPage />} />
             <Route path="/movie/:id" element={<MovieDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

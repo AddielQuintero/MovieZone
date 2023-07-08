@@ -56,6 +56,15 @@ export const tmdbService = {
     }
   },
 
+  getMoviesBySearch: async (query: string) => {
+    try {
+      const reply = await axiosClient(`search/movie`, { params: { query }})
+      return { success: true, movies: reply.data.results }
+    } catch {
+      return { success: false, movies: [] }
+    }
+  },
+
   // getPopularMovies: async () => {
   //   try {
   //     const reply = await axiosClient(`/movie/popular`)

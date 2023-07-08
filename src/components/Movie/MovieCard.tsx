@@ -1,11 +1,17 @@
-import { Card, CardHeader, CardFooter, Typography, IconButton } from '@material-tailwind/react'
-import { HeartIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { Card, CardHeader, CardFooter, Typography } from '@material-tailwind/react'
 import { Link } from 'react-router-dom'
 import { MovieCardProps } from '@types'
 import { CONFIG } from '@config'
+import { MovieFavorite } from '@components'
 
-export const MovieCard = ({ id, bg, title, className, classHeader, classFooter, classLink, classTypography, color }: MovieCardProps) => {
+export const MovieCard = ({ id, bg, title, className, classHeader, classFooter, classLink, classButton, classIcon, classTypography, color }: MovieCardProps) => {
+  const [favorite, setFavorite] = useState(false)
   const background = CONFIG.w500Image(bg)
+
+  const handleFavorite = () => {
+    setFavorite(!favorite)
+  }
 
   return (
     <Card shadow={false} className={className}>
@@ -22,9 +28,12 @@ export const MovieCard = ({ id, bg, title, className, classHeader, classFooter, 
 
       <CardFooter className={classFooter}>
         <Typography className={classTypography}>{title}</Typography>
-        <IconButton variant="text" color="white" className="h-5 w-5">
-          <HeartIcon className="h-5 w-5 text-indigo-500" />
-        </IconButton>
+        <MovieFavorite
+          classButton={classButton}
+          classIcon={classIcon}
+          handleFavorite={handleFavorite}
+          favorite={favorite}
+        />
       </CardFooter>
     </Card>
   )

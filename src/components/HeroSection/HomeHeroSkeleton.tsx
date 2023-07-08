@@ -14,7 +14,8 @@ export const HomeHeroSkeleton = ({ reflection }: MovieSkeleton) => {
         <div className="bg-gray-300 h-64 w-4/5 mx-auto mb-2 rounded-2xl" />
         <div className="w-full relative text-gray-300">
           <div className="space-y-1 mb-4">
-            <div className="grid grid-cols-2 gap-4 max-w-xs">
+            <div className="grid grid-cols-3 gap-4 max-w-xs">
+              <div className="h-4 bg-gray-300 rounded col-span-1"></div>
               <div className="h-4 bg-gray-300 rounded col-span-1"></div>
               <div className="h-4 bg-gray-300 rounded col-span-1"></div>
             </div>
@@ -23,6 +24,10 @@ export const HomeHeroSkeleton = ({ reflection }: MovieSkeleton) => {
           <div className="h-8 mb-4 bg-gray-300 rounded"></div>
 
           <div className="h-16 hidden sm:block bg-gray-300 rounded"></div>
+
+          <div className="grid grid-cols-2 pt-6">
+            <div className="h-8 bg-gray-300 rounded col-span-1"></div>
+          </div>
 
           <div className="space-y-1 pt-6">
             <div className="grid grid-cols-2 gap-4 max-w-md">

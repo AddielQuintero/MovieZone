@@ -23,6 +23,8 @@ export const MoviePremier = ({ ratedMovie, classTypography, variant }: MoviePrem
               classLink="premier__card-link h-36 w-full"
               classTypography="premier__card-typography max-lg:text-sm font-normal leading-4"
               classFooter="premier__card-footer flex justify-between gap-3 p-2 "
+              classButton="h-5 w-5"
+              classIcon="h-5 w-5 text-indigo-500"
             />
           ))
         )}

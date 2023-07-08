@@ -1,11 +1,12 @@
-import { useSelector } from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { setGenreMovies, setPopularMovies, setTopRatedMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
+import { setGenreMovies, setLoading, setPopularMovies, setTopRatedMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 import { MovieList, HomeSlider, MovieGenres, MoviePremier } from '@components'
 import { tmdbService } from '@services'
 import { TStore } from '@types'
 
 export const Home = () => {
+  const loading = useSelector((state: TStore) => state.data.isLoader, shallowEqual)
   const topRated = useSelector((state: TStore) => state.data.topRated)
   const trending = useSelector((state: TStore) => state.data.trending)
   const popular = useSelector((state: TStore) => state.data.popular)
@@ -24,9 +25,11 @@ export const Home = () => {
     popularFetch.success && dispatch(setPopularMovies(popularFetch.movies))
     upcomingFetch.success && dispatch(setUpcomingMovies(upcomingFetch.movies))
     genreFetch.success && dispatch(setGenreMovies(genreFetch.movies))
+    dispatch(setLoading(false))
   }
 
   useEffect(() => {
+    dispatch(setLoading(true))
     fetch()
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -49,6 +52,7 @@ export const Home = () => {
             classChip="bg-blue-gray-800 cursor-pointer"
             classSkeleton="flex flex-wrap gap-4"
             classItemSkeleton="genres__home-skeleton w-[5.5rem] sm:w-24  h-8 bg-gray-300 rounded"
+            loading={loading}
             genres={genres}
             variant="h3"
             value={20}
