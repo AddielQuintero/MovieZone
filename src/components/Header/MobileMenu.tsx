@@ -25,7 +25,7 @@ export const MobileMenu = (props: MobileMenuProps) => {
 
         <div className="container__drawer divide-y divide-pink-200 overflow-y-scroll h-[calc(100%-70px)]">
           <div className="px-4 pt-1 pb-5">
-            <CustomSearch />
+            <CustomSearch onClose={onClose}/>
           </div>
 
           <div className="space-y-2">

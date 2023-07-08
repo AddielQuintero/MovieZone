@@ -1,43 +1,51 @@
-import { NotFound } from '@pages'
-import { MovieGrid } from '@components'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
-import { tmdbService } from '@services'
-import { setLoading, setPopularMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 import { shallowEqual, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { MovieGrid } from '@components'
+import { tmdbService } from '@services'
+import { NotFound } from '@pages'
 import { TMovie, TSelectors, TStore } from '@types'
+import { setBySearchMovies, setLoading, setPopularMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 
 export const MovieGridPage = () => {
   const loading = useSelector((state: TStore) => state.data.isLoader, shallowEqual)
   const dispatch = useAppDispatch()
-  const { category } = useParams<{ category: string }>()
+  const { category, keyword } = useParams()
 
-  if (!category) return <NotFound />
+  if (!category && !keyword) return <NotFound />
 
   const selectors: TSelectors = {
     trending: useSelector((state: TStore) => state.data.trending, shallowEqual),
     popular: useSelector((state: TStore) => state.data.popular, shallowEqual),
     upcoming: useSelector((state: TStore) => state.data.upcoming, shallowEqual),
+    bySearch: useSelector((state: TStore) => state.data.bySearch, shallowEqual),
   }
 
-  const movies: TMovie[] = selectors[category as keyof TSelectors] || []
+  const movies: TMovie[] = selectors[category as keyof TSelectors] || selectors.bySearch
 
   const fetch = async () => {
     let response = { success: false, movies: [] }
-    switch (category) {
-      case 'trending':
-        response = await tmdbService.getTrendingMovies()
-        response.success && dispatch(setTrendingMovies(response.movies))
-        break
-      case 'popular':
-        response = await tmdbService.getListMovies('popular')
-        response.success && dispatch(setPopularMovies(response.movies))
-        break
-      case 'upcoming':
-        response = await tmdbService.getListMovies('upcoming')
-        response.success && dispatch(setUpcomingMovies(response.movies))
-        break
+
+    if (keyword === undefined) {
+      switch (category) {
+        case 'trending':
+          response = await tmdbService.getTrendingMovies()
+          response.success && dispatch(setTrendingMovies(response.movies))
+          break
+        case 'popular':
+          response = await tmdbService.getListMovies('popular')
+          response.success && dispatch(setPopularMovies(response.movies))
+          break
+        case 'upcoming':
+          response = await tmdbService.getListMovies('upcoming')
+          response.success && dispatch(setUpcomingMovies(response.movies))
+          break
+      }
+    } else {
+      response = await tmdbService.getMoviesBySearch(keyword)
+      response.success && dispatch(setBySearchMovies(response.movies))
     }
+
     dispatch(setLoading(false))
   }
 
@@ -45,11 +53,11 @@ export const MovieGridPage = () => {
     dispatch(setLoading(true))
     window.scrollTo({ top: 0, behavior: 'smooth' })
     fetch()
-  }, [category])
+  }, [category, keyword])
 
   return (
     <>
-      <MovieGrid category={category} movies={movies} loading={loading} />
+      <MovieGrid category={category} keyword={keyword} movies={movies} loading={loading} />
     </>
   )
 }

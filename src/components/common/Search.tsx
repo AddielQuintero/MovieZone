@@ -1,13 +1,39 @@
 import { IconButton, Input } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { useState, useRef, ChangeEventHandler, FormEventHandler } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export const CustomSearch = () => {
+export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
+  const [value, setValue] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const navigate = useNavigate()
+
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = ({ target: { value } }) => {
+    setValue(value)
+  }
+
+  const handleOnSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault()
+    value && navigate(`/search/${value}`)
+    setValue('')
+    onClose && onClose()
+    inputRef.current && inputRef.current.blur()
+  }
+
   return (
-    <div className="relative flex w-full gap-2">
-      <Input type="search" label="Search..." color="pink" className="pr-10 min-w-[230px]" />
-      <IconButton className="!absolute right-1" variant="text" color="pink">
+    <form className="relative flex w-full gap-2" onSubmit={handleOnSubmit}>
+      <Input
+        inputRef={inputRef}
+        type="search"
+        label="Search..."
+        color="pink"
+        className="pr-10 min-w-[230px]"
+        value={value}
+        onChange={handleOnChange}
+      />
+      <IconButton className="!absolute right-1" variant="text" color="pink" type="submit">
         <MagnifyingGlassIcon className="h-4 w-4" />
       </IconButton>
-    </div>
+    </form>
   )
 }

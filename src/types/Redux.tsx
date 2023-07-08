@@ -11,6 +11,7 @@ export interface TStore {
     nowPlaying: TMovie[]
     similar: TMovie[]
     byGenres: TMovie[]
+    bySearch: TMovie[]
     detailMovie: TMovieDetail
   }
 }
@@ -25,6 +26,7 @@ export interface State {
   nowPlaying: TMovie[]
   similar: TMovie[]
   byGenres: TMovie[]
+  bySearch: TMovie[]
   detailMovie: TMovieDetail
 }
 
@@ -38,5 +40,6 @@ export const initialState = {
   nowPlaying: [],
   similar: [],
   byGenres: [],
+  bySearch: [],
   detailMovie: {} as TMovieDetail,
 }
