@@ -1,13 +1,24 @@
-import { IconicButton, LinkButton, MovieBackgroundImage, MovieInfo } from '@components'
+import { IconicButton, LinkButton, MovieBackgroundImage, MovieFavorite, MovieInfo } from '@components'
 import { PlayIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import { Typography } from '@material-tailwind/react'
 import { CONFIG } from '@config'
 import { MovieProps } from '@types'
+import { useLocalStorage } from '@hooks'
+import { useDispatch } from 'react-redux'
+import { toggleFavorite } from '@redux'
 
 export const HomeHero = ({ movies }: MovieProps) => {
   const background = CONFIG.originalImage(movies.backdrop_path)
   const formattedDate = movies.release_date.slice(0, 4)
-  // const formattedDate = movies.release_date.replace(/-/g, ' ')
+  const favorites = useLocalStorage()
+  const favorite = favorites.some((favorite) => favorite.id === movies.id)
+  const dispatch = useDispatch()
+
+  const handleFavorite = () => {
+    dispatch(toggleFavorite({ id: movies.id, title: movies.title, poster_path: movies.poster_path }))
+  }
+
+
   return (
     <div className="home__hero flex items-center h-[calc(100vh-50px)] min-h-[620px] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
       <MovieBackgroundImage
@@ -19,11 +30,14 @@ export const HomeHero = ({ movies }: MovieProps) => {
 
       <div className="relative max-w-2xl ">
         <div className="sm:mb-8 flex">
-          <MovieInfo
-            average={movies.vote_average}
-            date={formattedDate}
-            className="text-gray-800 font-bold"
-          />
+          <MovieInfo average={movies.vote_average} date={formattedDate} className="text-gray-800 font-bold">
+            <MovieFavorite
+              handleFavorite={handleFavorite}
+              favorite={favorite}
+              classButton="h-5 w-5"
+              classIcon="h-5 w-5 text-indigo-500"
+            />
+          </MovieInfo>
         </div>
         <div className="mt-2">
           <Typography className="text-3xl font-bold tracking-tight text-gray-800 md:text-5xl" variant="h3">
