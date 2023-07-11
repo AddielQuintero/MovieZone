@@ -12,6 +12,7 @@ export interface TStore {
     similar: TMovie[]
     byGenres: TMovie[]
     bySearch: TMovie[]
+    favorites: TMovie[]
     detailMovie: TMovieDetail
   }
 }
@@ -27,10 +28,11 @@ export interface State {
   similar: TMovie[]
   byGenres: TMovie[]
   bySearch: TMovie[]
+  favorites: TMovie[]
   detailMovie: TMovieDetail
 }
 
-export const initialState = {
+export const initialState: State = {
   isLoader: true,
   trending: [],
   popular: [],
@@ -41,5 +43,12 @@ export const initialState = {
   similar: [],
   byGenres: [],
   bySearch: [],
+  favorites: [],
   detailMovie: {} as TMovieDetail,
 }
+
+export type TSetFavorite = { type: 'data/setFavoritesMovies'; payload: TMovie[] }
+export type TToggleFavorite = { type: 'data/toggleFavorite'; payload: TMovie }
+export type TIsLoader = { type: 'data/setLoading'; payload: boolean }
+
+export type Action = TSetFavorite | TToggleFavorite | TIsLoader

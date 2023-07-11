@@ -79,7 +79,7 @@ export interface MovieCardProps extends ClassNameProps {
   id: number
   bg: string
   title?: string
-  // date?: string
+  favorites: TFavoriteStorage[]
   classHeader?: string
   classFooter?: string
   classLink?: string
@@ -198,4 +198,10 @@ export interface MovieFavoriteProps {
   classIcon?: string
   favorite: boolean
   handleFavorite: () => void
+}
+
+export interface TFavoriteStorage {
+  id: number
+  title: string
+  poster_path: string
 }

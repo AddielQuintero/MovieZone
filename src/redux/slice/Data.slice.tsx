@@ -38,6 +38,18 @@ export const DataSlice = createSlice({
     setSimilarMovies: (state, action) => {
       state.similar = action.payload
     },
+    setFavoritesMovies: (state, action) => {
+      state.favorites = action.payload
+    },
+    toggleFavorite: (state, action) => {
+      const favorite = state.favorites.some((favorite) => favorite.id === action.payload.id)
+      const favorites = !favorite
+        ? [...state.favorites, action.payload]
+        : state.favorites.filter((favorite) => favorite.id !== action.payload.id)
+
+      localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
+      state.favorites = favorites
+    },
   },
 })
 
@@ -53,6 +65,8 @@ export const {
   setBySearchMovies,
   setNowPlayingMovies,
   setSimilarMovies,
+  setFavoritesMovies,
+  toggleFavorite,
 } = DataSlice.actions
 
 export default DataSlice.reducer
