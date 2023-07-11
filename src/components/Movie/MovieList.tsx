@@ -3,8 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { MovieCard, LinkButton, MovieListSkeleton } from '@components'
 import { MovieListProps } from '@types'
 import 'swiper/swiper-bundle.min.css'
+import { useLocalStorage } from '@hooks'
 
 export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
+  console.log("🚀  movies:", movies)
+  const favorites = useLocalStorage()
+
   return (
     <div className="movie__list ">
       <div className="flex justify-between items-center mb-2">
@@ -33,6 +37,7 @@ export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
                     id={movie.id}
                     bg={movie.poster_path ? movie.poster_path : movie.backdrop_path}
                     title={movie.title}
+                    favorites={favorites}
                     className="test bg-inherit relative grid w-full h-full rounded-none items-end"
                     classHeader={`relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-cover`}
                     classFooter="flex items-start justify-between w-full py-2 px-1 gap-2"
