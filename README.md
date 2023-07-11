@@ -1,6 +1,6 @@
 ## MovieZone
 
-This is a [React](https://react.dev/) project bootstrapped with [`npm create vite@latest`](https://vitejs.dev/), [Typescript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/) to implement a navigation system in a React.js application.
+This is a [React](https://react.dev/) project bootstrapped with [`npm create vite@latest`](https://vitejs.dev/), [Typescript](https://www.typescriptlang.org/), [Tailwind CSS](https://tailwindcss.com/) and [material-tailwind](https://www.material-tailwind.com/) to implement a navigation system in a React.js application.
 
 See project in [https://movie-zone-two.vercel.app/](https://movie-zone-two.vercel.app/)
 

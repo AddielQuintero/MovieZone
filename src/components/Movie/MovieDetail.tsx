@@ -3,15 +3,19 @@ import { PlayIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid'
 import { LinkButton, MovieGenres, MovieImage, MovieInfo, IconicButton, MovieFavorite } from '@components'
 import { MovieDetailProps } from '@types'
 import { formatRuntime } from '@utilities'
-import { useState } from 'react'
+import { useLocalStorage } from '@hooks'
+import { useDispatch } from 'react-redux'
+import { toggleFavorite } from '@redux'
 
 export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
-  const [favorite, setFavorite] = useState(false)
+  const favorites = useLocalStorage()
+  const favorite = favorites.some((favorite) => favorite.id === detailMovie.id)
   const formattedDate = detailMovie.release_date.slice(0, 4)
   const formattedRuntime = formatRuntime(detailMovie.runtime)
-
+  const dispatch = useDispatch()
+  
   const handleFavorite = () => {
-    setFavorite(!favorite)
+    dispatch(toggleFavorite({ id: detailMovie.id, title: detailMovie.title, poster_path: detailMovie.poster_path }))
   }
 
   return (
