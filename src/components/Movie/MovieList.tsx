@@ -7,6 +7,7 @@ import { useLocalStorage } from '@hooks'
 
 export const MovieList = ({ title, redirect, movies, loading }: MovieListProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
+  const isEmpty = title === 'Similar Movies' ? 'No similar movies at the moment.' : 'No films available at the moment.'
 
   return (
     <section className="movie__list ">
@@ -50,7 +51,7 @@ export const MovieList = ({ title, redirect, movies, loading }: MovieListProps) 
       {!movies.length && !loading && (
         <div className="flex justify-center items-start flex-wrap mt-10">
           <div className="p-4 rounded-md bg-gray-300 text-pink-400 text-center">
-            <h1>No films available at the moment.</h1>
+            <h1>{isEmpty}</h1>
           </div>
         </div>
       )}
