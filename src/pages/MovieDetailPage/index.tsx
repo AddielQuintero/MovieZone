@@ -39,7 +39,7 @@ export const MovieDetailPage = () => {
   return (
     <div className="gap-x-5 md:gap-x-9 lg:gap-x-12 w-full max-w-[1536px]  mx-auto mt-9 px-5 pb-5 sm:max-2xl:px-[5vw]">
       {isMovieEmpty ? <HomeHeroSkeleton /> : <MovieDetail loading={loading} detailMovie={movie} />}
-      <MovieList title="Similar Movies" movies={similar} />
+      <MovieList title="Similar Movies" movies={similar} loading={loading} />
     </div>
   )
 }
