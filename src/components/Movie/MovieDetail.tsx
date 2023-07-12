@@ -4,22 +4,13 @@ import { LinkButton, MovieGenres, MovieImage, MovieInfo, IconicButton, MovieFavo
 import { MovieDetailProps } from '@types'
 import { formatRuntime } from '@utilities'
 import { useLocalStorage } from '@hooks'
-import { useDispatch } from 'react-redux'
-import { toggleFavorite } from '@redux'
 
 export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
-  const favorites = useLocalStorage()
-  const favorite = favorites.some((favorite) => favorite.id === detailMovie.id)
+  const { isFavorite, handleFavorite } = useLocalStorage()
   const formattedDate = detailMovie.release_date.slice(0, 4)
   const formattedRuntime = formatRuntime(detailMovie.runtime)
-  const dispatch = useDispatch()
-  
-  const handleFavorite = () => {
-    dispatch(toggleFavorite({ id: detailMovie.id, title: detailMovie.title, poster_path: detailMovie.poster_path }))
-  }
 
   return (
-    // <div></div>
     <div className="movie__detail grid grid-cols-1 md:grid-cols-3 place-items-start gap-6 max-w-[992px] mx-auto py-10 md:py-20">
       <MovieImage poster_path={detailMovie.poster_path} backdrop_path={detailMovie.backdrop_path} />
 
@@ -38,8 +29,8 @@ export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
         <div className="summary ">
           <MovieInfo average={detailMovie.vote_average} runtime={formattedRuntime} date={formattedDate}>
             <MovieFavorite
-              handleFavorite={handleFavorite}
-              favorite={favorite}
+              handleFavorite={() => handleFavorite(detailMovie.id, detailMovie.title, detailMovie.poster_path) }
+              favorite={isFavorite(detailMovie.id)}
               classButton="h-5 w-5"
               classIcon="h-5 w-5 text-indigo-500"
             />

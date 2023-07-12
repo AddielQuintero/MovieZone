@@ -4,7 +4,7 @@ import { Typography } from '@material-tailwind/react'
 import { useLocalStorage } from '@hooks'
 
 export const MoviePremier = ({ ratedMovie, classTypography, variant }: MoviePremierProps) => {
-  const favorites = useLocalStorage()
+  const {isFavorite, handleFavorite} = useLocalStorage()
   
   return (
     <div className="premier mt-10">
@@ -21,7 +21,8 @@ export const MoviePremier = ({ ratedMovie, classTypography, variant }: MoviePrem
               id={movie.id}
               bg={movie.poster_path}
               title={movie.title}
-              favorites={favorites}
+              favorite={isFavorite(movie.id)}
+              handleFavorite={() => handleFavorite(movie.id, movie.title, movie.poster_path)}
               className="premier__card relative flex  bg-inherit rounded-none mb-2"
               classHeader="premier__card-header relative h-full inset-0 m-0 w-full rounded-2xl bg-cover"
               classLink="premier__card-link h-36 w-full"

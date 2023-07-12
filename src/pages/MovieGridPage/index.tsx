@@ -18,6 +18,7 @@ export const MovieGridPage = () => {
     trending: useSelector((state: TStore) => state.data.trending, shallowEqual),
     popular: useSelector((state: TStore) => state.data.popular, shallowEqual),
     upcoming: useSelector((state: TStore) => state.data.upcoming, shallowEqual),
+    favorites: useSelector((state: TStore) => state.data.favorites, shallowEqual),
     bySearch: useSelector((state: TStore) => state.data.bySearch, shallowEqual),
   }
 

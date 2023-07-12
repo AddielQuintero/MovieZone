@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { setFavoritesMovies } from '@redux'
+import { setFavoritesMovies, toggleFavorite } from '@redux'
 import { TMovie, TStore } from '@types'
 
 export const useLocalStorage = () => {
@@ -9,11 +9,18 @@ export const useLocalStorage = () => {
 
   useEffect(() => {
     if (!favorites.length) {
-        const favoriteStorage: TMovie[] = JSON.parse(localStorage.getItem('FAVORITES_V1') ?? '[]')
-        dispatch(setFavoritesMovies(favoriteStorage))
+      const favoriteStorage: TMovie[] = JSON.parse(localStorage.getItem('FAVORITES_V1') ?? '[]')
+      dispatch(setFavoritesMovies(favoriteStorage))
     }
-    
-  }, [dispatch])
+  }, [])
 
-  return favorites
+  const isFavorite = (id: number) => {
+    return favorites.some((favorite) => favorite.id === id)
+  }
+
+  const handleFavorite = (id: number, title: string, poster_path: string) => {
+    dispatch(toggleFavorite({ id, title, poster_path }))
+  }
+
+  return { isFavorite, handleFavorite }
 }

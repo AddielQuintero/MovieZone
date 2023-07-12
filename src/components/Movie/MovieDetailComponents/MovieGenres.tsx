@@ -3,7 +3,7 @@ import { Chip, Typography } from '@material-tailwind/react'
 import { MovieGenreProps } from '@types'
 import { Link } from 'react-router-dom'
 
-export const MovieGenres = ({ loading, genres, className, classListGenres, classTypography, classChip, redirect, variant, title, value, classSkeleton, classItemSkeleton }: MovieGenreProps) => {
+export const MovieGenres = ({ loading, genres, redirect, variant, title, value, className, classListGenres, classTypography, classChip, classSkeleton, classItemSkeleton }: MovieGenreProps) => {
   const shouldShowTitle = title && (loading || genres.length > 0);
 
   return (

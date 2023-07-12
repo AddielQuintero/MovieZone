@@ -6,8 +6,7 @@ import 'swiper/swiper-bundle.min.css'
 import { useLocalStorage } from '@hooks'
 
 export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
-  console.log("🚀  movies:", movies)
-  const favorites = useLocalStorage()
+  const {isFavorite, handleFavorite} = useLocalStorage()
 
   return (
     <div className="movie__list ">
@@ -37,7 +36,8 @@ export const MovieList = ({ title, redirect, movies }: MovieListProps) => {
                     id={movie.id}
                     bg={movie.poster_path ? movie.poster_path : movie.backdrop_path}
                     title={movie.title}
-                    favorites={favorites}
+                    favorite={isFavorite(movie.id)}
+                    handleFavorite={() => handleFavorite(movie.id, movie.title, movie.poster_path)}
                     className="test bg-inherit relative grid w-full h-full rounded-none items-end"
                     classHeader={`relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-cover`}
                     classFooter="flex items-start justify-between w-full py-2 px-1 gap-2"
