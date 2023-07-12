@@ -49,6 +49,8 @@ export interface TMovieDetail {
 
 export interface MovieProps {
   movies: TMovie
+  favorite: boolean
+  handleFavorite: () => void
 }
 
 export interface MovieDetailProps {
@@ -79,7 +81,8 @@ export interface MovieCardProps extends ClassNameProps {
   id: number
   bg: string
   title?: string
-  favorites: TFavoriteStorage[]
+  favorite: boolean
+  handleFavorite: () => void
   classHeader?: string
   classFooter?: string
   classLink?: string
@@ -160,7 +163,6 @@ export interface SpokenLanguage {
 
 export interface MovieSkeleton {
   reflection?: boolean
-  // homeHero?: boolean
   detail?: boolean
 }
 
@@ -177,6 +179,7 @@ export type TSelectors = {
   popular: TMovie[]
   trending: TMovie[]
   bySearch: TMovie[]
+  favorites: TMovie[]
 }
 
 export const MovieType: TMovieType = {

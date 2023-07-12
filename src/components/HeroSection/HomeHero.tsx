@@ -3,21 +3,10 @@ import { PlayIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import { Typography } from '@material-tailwind/react'
 import { CONFIG } from '@config'
 import { MovieProps } from '@types'
-import { useLocalStorage } from '@hooks'
-import { useDispatch } from 'react-redux'
-import { toggleFavorite } from '@redux'
 
-export const HomeHero = ({ movies }: MovieProps) => {
+export const HomeHero = ({ movies, favorite, handleFavorite }: MovieProps) => {
   const background = CONFIG.originalImage(movies.backdrop_path)
   const formattedDate = movies.release_date.slice(0, 4)
-  const favorites = useLocalStorage()
-  const favorite = favorites.some((favorite) => favorite.id === movies.id)
-  const dispatch = useDispatch()
-
-  const handleFavorite = () => {
-    dispatch(toggleFavorite({ id: movies.id, title: movies.title, poster_path: movies.poster_path }))
-  }
-
 
   return (
     <div className="home__hero flex items-center h-[calc(100vh-50px)] min-h-[620px] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
@@ -26,7 +15,6 @@ export const HomeHero = ({ movies }: MovieProps) => {
         classImage="object-cover"
         className="BackgroundImage absolute top-0 left-0 inset-0 -z-10 h-full w-full "
       />
-      {/* <MovieBackgroundImage url={item.linkImg} className="absolute top-0 left-0 inset-0 -z-10 h-[65vh] sm:h-[69vh] lg:h-[70vh]" /> */}
 
       <div className="relative max-w-2xl ">
         <div className="sm:mb-8 flex">

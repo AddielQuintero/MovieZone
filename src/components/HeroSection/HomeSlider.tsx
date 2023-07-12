@@ -6,9 +6,11 @@ import { CONFIG } from '@config'
 import { tmdbService } from '@services'
 import { setLoading, setNowPlayingMovies, useAppDispatch } from '@redux'
 import { useSelector } from 'react-redux'
+import { useLocalStorage } from '@hooks'
 
 export const HomeSlider = () => {
   const nowPlaying = useSelector((state: TStore) => state.data.nowPlaying)
+  const { isFavorite, handleFavorite } = useLocalStorage()
 
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
@@ -17,7 +19,7 @@ export const HomeSlider = () => {
   const dispatch = useAppDispatch()
 
   const fetchTopRated = async () => {
-    const topRated = await tmdbService.getListMovies('now_playing', 1, 7)
+    const topRated = await tmdbService.getListMovies('now_playing', 0, 6)
     topRated.success && dispatch(setNowPlayingMovies(topRated.movies))
     dispatch(setLoading(false))
   }
@@ -103,7 +105,12 @@ export const HomeSlider = () => {
         <>
           <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
             {nowPlaying.map((movie, index) => (
-              <HomeHero key={index} movies={movie} />
+              <HomeHero
+                key={index}
+                movies={movie}
+                favorite={isFavorite(movie.id)}
+                handleFavorite={() => handleFavorite(movie.id, movie.title, movie.poster_path)}
+              />
             ))}
           </Slider>
 
