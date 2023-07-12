@@ -4,7 +4,7 @@ import { TStore } from '@types'
 import { HomeHero, HomeHeroSkeleton, MovieBackgroundImage } from '@components'
 import { CONFIG } from '@config'
 import { tmdbService } from '@services'
-import { setLoading, setNowPlayingMovies, useAppDispatch } from '@redux'
+import { setNowPlayingMovies, useAppDispatch } from '@redux'
 import { useSelector } from 'react-redux'
 import { useLocalStorage } from '@hooks'
 
@@ -21,7 +21,7 @@ export const HomeSlider = () => {
   const fetchTopRated = async () => {
     const topRated = await tmdbService.getListMovies('now_playing', 0, 6)
     topRated.success && dispatch(setNowPlayingMovies(topRated.movies))
-    dispatch(setLoading(false))
+    // dispatch(setLoading(false))
   }
 
   // const loadCurrentSlide = () => {

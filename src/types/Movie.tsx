@@ -66,6 +66,7 @@ export interface MovieListProps {
   title: string
   redirect?: string
   movies: TMovie[]
+  loading: boolean
 }
 
 export interface MovieGridProps {
