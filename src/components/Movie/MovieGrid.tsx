@@ -53,7 +53,7 @@ export const MovieGrid = ({ category, keyword, movies, children, loading }: Movi
       {!movies.length && !loading && (
         <div className="flex justify-center items-start flex-wrap mt-10">
           <div className="p-4 rounded-md bg-gray-300 text-pink-400 text-center">
-            <h1>No films available at the moment.</h1>
+            <h1>No movies available at the moment.</h1>
           </div>
         </div>
       )}

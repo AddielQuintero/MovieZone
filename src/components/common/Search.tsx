@@ -1,7 +1,7 @@
 import { IconButton, Input } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useState, useRef, ChangeEventHandler, FormEventHandler } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate  } from 'react-router-dom'
 
 export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
   const [value, setValue] = useState('')
@@ -13,12 +13,14 @@ export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
   }
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault()
-    value && navigate(`/search/${value}`)
-    setValue('')
-    onClose && onClose()
-    inputRef.current && inputRef.current.blur()
-  }
+    event.preventDefault();
+    const params = new URLSearchParams();
+    value && params.set('name', value);
+    value && navigate({ pathname: '/search', search: params.toString() });
+    setValue('');
+    onClose && onClose();
+    inputRef.current && inputRef.current.blur();
+  };
 
   return (
     <form className="relative flex w-full gap-2" onSubmit={handleOnSubmit}>

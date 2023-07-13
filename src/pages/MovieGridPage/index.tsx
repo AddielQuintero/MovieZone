@@ -1,17 +1,17 @@
-import { useParams } from 'react-router-dom'
 import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { MovieGrid } from '@components'
 import { tmdbService } from '@services'
 import { NotFound } from '@pages'
+import { useQueryParams } from '@hooks'
 import { TMovie, TSelectors, TStore } from '@types'
 import { setBySearchMovies, setLoading, setPopularMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 
 export const MovieGridPage = () => {
   const loading = useSelector((state: TStore) => state.data.isLoader, shallowEqual)
+  const { category, keyword } = useQueryParams()
   const dispatch = useAppDispatch()
-  const { category, keyword } = useParams()
-
+  
   if (!category && !keyword) return <NotFound />
 
   const selectors: TSelectors = {
@@ -27,7 +27,7 @@ export const MovieGridPage = () => {
   const fetch = async () => {
     let response = { success: false, movies: [] }
 
-    if (keyword === undefined) {
+    if (keyword === null) {
       switch (category) {
         case 'trending':
           response = await tmdbService.getTrendingMovies()
