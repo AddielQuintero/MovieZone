@@ -71,7 +71,7 @@ export interface MovieListProps {
 
 export interface MovieGridProps {
   category?: string
-  keyword?: string
+  keyword: string | null
   movies: TMovie[]
   children?: React.ReactNode
   loading: boolean

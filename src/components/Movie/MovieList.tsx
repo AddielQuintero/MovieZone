@@ -7,7 +7,7 @@ import { useLocalStorage } from '@hooks'
 
 export const MovieList = ({ title, redirect, movies, loading }: MovieListProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
-  const isEmpty = title === 'Similar Movies' ? 'No similar movies at the moment.' : 'No films available at the moment.'
+  const isEmpty = title === 'Similar Movies' ? 'No similar movies at the moment.' : 'No movies available at the moment.'
 
   return (
     <section className="movie__list ">
