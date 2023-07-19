@@ -1,4 +1,4 @@
-import { colors } from '@material-tailwind/react/types/generic'
+import { color } from "@material-tailwind/react/types/components/button"
 
 export interface ClassNameProps {
   className?: string
@@ -19,6 +19,8 @@ export interface LinkButtonProps extends ClassNameProps {
 
 export interface IconicButtonProps extends ClassNameProps {
   IconComponent: React.ElementType
-  color: colors
-  name: string
+  color: color
+  name?: string
+  onClick?: ()=> void
+  refButton?: React.Ref<HTMLButtonElement>
 }

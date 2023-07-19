@@ -1,7 +1,7 @@
 import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { setGenreMovies, setLoading, setPopularMovies, setTopRatedMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
-import { MovieList, HomeSlider, MovieGenres, MoviePremier } from '@components'
+import { MovieList, HomeSlider, MovieGenres, MoviePremier, UpButton } from '@components'
 import { tmdbService } from '@services'
 import { TStore } from '@types'
 
@@ -15,15 +15,15 @@ export const Home = () => {
   const dispatch = useAppDispatch()
 
   const fetch = async () => {
-    const topRatedFetch = await tmdbService.getListMovies('top_rated', 0, 4)
-    const trendingFetch = await tmdbService.getTrendingMovies(0, 10)
-    const popularFetch = await tmdbService.getListMovies('popular', 0, 10)
-    const upcomingFetch = await tmdbService.getListMovies('upcoming', 0, 10)
+    const topRatedFetch = await tmdbService.getListMovies('top_rated')
+    const trendingFetch = await tmdbService.getTrendingMovies()
+    const popularFetch = await tmdbService.getListMovies('popular')
+    const upcomingFetch = await tmdbService.getListMovies('upcoming')
     const genreFetch = await tmdbService.getGenreMovies()
-    topRatedFetch.success && dispatch(setTopRatedMovies(topRatedFetch.movies))
-    trendingFetch.success && dispatch(setTrendingMovies(trendingFetch.movies))
-    popularFetch.success && dispatch(setPopularMovies(popularFetch.movies))
-    upcomingFetch.success && dispatch(setUpcomingMovies(upcomingFetch.movies))
+    topRatedFetch.success && dispatch(setTopRatedMovies(topRatedFetch.movies.results.slice(0, 4)))
+    trendingFetch.success && dispatch(setTrendingMovies(trendingFetch.movies.results.slice(0, 10)))
+    popularFetch.success && dispatch(setPopularMovies(popularFetch.movies.results.slice(0, 10)))
+    upcomingFetch.success && dispatch(setUpcomingMovies(upcomingFetch.movies.results.slice(0, 10)))
     genreFetch.success && dispatch(setGenreMovies(genreFetch.movies))
     dispatch(setLoading(false))
   }
@@ -66,6 +66,7 @@ export const Home = () => {
           />
         </aside>
       </section>
+      <UpButton />
     </>
   )
 }

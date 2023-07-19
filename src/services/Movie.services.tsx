@@ -1,29 +1,29 @@
-import { MovieType, TMovieType } from '@types'
+import { MovieType, TMovieType, ParamsProps, TResponse, TMovieResponse } from '@types'
 import { axiosClient } from '@services'
 
 export const tmdbService = {
-  getListMovies: async (type: keyof TMovieType, sliceStart?: number, sliceEnd?: number) => {
+  getTrendingMovies: async (params?: ParamsProps): Promise<TResponse> => {
     try {
-      const reply = await axiosClient(`/movie/${MovieType[type]}`)
-      return { success: true, movies: reply.data.results.slice(sliceStart, sliceEnd) }
+      const response = await axiosClient(`/trending/movie/week`, { params })
+      return { success: true, movies: response.data }
     } catch {
-      return { success: false, movies: [] }
+      return { success: false, movies: {} as TMovieResponse }
     }
   },
 
-  getTrendingMovies: async (sliceStart?: number, sliceEnd?: number) => {
+  getListMovies: async (type: keyof TMovieType, params?: ParamsProps): Promise<TResponse> => {
     try {
-      const reply = await axiosClient(`/trending/movie/week`)
-      return { success: true, movies: reply.data.results.slice(sliceStart, sliceEnd) }
+      const response = await axiosClient(`/movie/${MovieType[type]}`, { params })
+      return { success: true, movies: response.data }
     } catch {
-      return { success: false, movies: [] }
+      return { success: false, movies: {} as TMovieResponse }
     }
   },
 
   getDetailMovies: async (id: number) => {
     try {
-      const reply = await axiosClient(`/movie/${id}`)
-      return { success: true, movies: reply.data }
+      const response = await axiosClient(`/movie/${id}`)
+      return { success: true, movies: response.data }
     } catch {
       return { success: false, movies: [] }
     }
@@ -31,8 +31,8 @@ export const tmdbService = {
 
   getGenreMovies: async () => {
     try {
-      const reply = await axiosClient(`/genre/movie/list`)
-      return { success: true, movies: reply.data.genres }
+      const response = await axiosClient(`/genre/movie/list`)
+      return { success: true, movies: response.data.genres }
     } catch {
       return { success: false, movies: [] }
     }
@@ -40,64 +40,28 @@ export const tmdbService = {
 
   getSimilarMovies: async (id: number) => {
     try {
-      const reply = await axiosClient(`/movie/${id}/similar`)
-      return { success: true, movies: reply.data.results }
+      const response = await axiosClient(`/movie/${id}/similar`)
+      return { success: true, movies: response.data.results }
     } catch {
       return { success: false, movies: [] }
     }
   },
 
-  getMoviesByGenre: async (id: string) => {
+  getMoviesByGenre: async (params?: ParamsProps): Promise<TResponse> => {
     try {
-      const reply = await axiosClient(`discover/movie`, { params: { with_genres: id } })
-      return { success: true, movies: reply.data.results }
+      const response = await axiosClient(`discover/movie`, { params })
+      return { success: true, movies: response.data }
     } catch {
-      return { success: false, movies: [] }
+      return { success: false, movies: {} as TMovieResponse }
     }
   },
 
-  getMoviesBySearch: async (query: string) => {
+  getMoviesBySearch: async (params: ParamsProps): Promise<TResponse> => {
     try {
-      const reply = await axiosClient(`search/movie`, { params: { query }})
-      return { success: true, movies: reply.data.results }
+      const response = await axiosClient(`search/movie`, { params })
+      return { success: true, movies: response.data }
     } catch {
-      return { success: false, movies: [] }
+      return { success: false, movies: {} as TMovieResponse }
     }
   },
-
-  // getPopularMovies: async () => {
-  //   try {
-  //     const reply = await axiosClient(`/movie/popular`)
-  //     return { success: true, movies: reply.data.results.slice(0, 10) }
-  //   } catch {
-  //     return { success: false, movies: [] }
-  //   }
-  // },
-
-  // getUpcomingMovies: async () => {
-  //   try {
-  //     const reply = await axiosClient(`/movie/upcoming`)
-  //     return { success: true, movies: reply.data.results.slice(0, 10) }
-  //   } catch {
-  //     return { success: false, movies: [] }
-  //   }
-  // },
-
-  // getTopRatedMovies: async () => {
-  //   try {
-  //     const reply = await axiosClient(`/movie/top_rated`)
-  //     return { success: true, movies: reply.data.results.slice(0, 4) }
-  //   } catch {
-  //     return { success: false, movies: [] }
-  //   }
-  // },
-
-  // getNowPlayingMovies: async () => {
-  //   try {
-  //     const reply = await axiosClient(`/movie/now_playing`)
-  //     return { success: true, movies: reply.data.results.slice(1, 7) }
-  //   } catch {
-  //     return { success: false, movies: [] }
-  //   }
-  // },
 }

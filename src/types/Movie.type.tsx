@@ -1,4 +1,4 @@
-import { ClassNameProps } from '@types'
+import { ClassNameProps, TResponse } from '@types'
 import { colors } from '@material-tailwind/react/types/generic'
 
 export interface TMovie {
@@ -76,6 +76,8 @@ export interface MovieGridProps {
   children?: React.ReactNode
   loading: boolean
   success?: boolean
+  hasMore: boolean
+  handleSetPage: () => void
 }
 
 export interface MovieCardProps extends ClassNameProps {
@@ -167,28 +169,12 @@ export interface MovieSkeleton {
   detail?: boolean
 }
 
-export interface TMovieType {
-  upcoming: string
-  popular: string
-  top_rated: string
-  now_playing: string
-  trending: string
-}
-
 export type TSelectors = {
   upcoming: TMovie[]
   popular: TMovie[]
   trending: TMovie[]
   bySearch: TMovie[]
   favorites: TMovie[]
-}
-
-export const MovieType: TMovieType = {
-  upcoming: 'upcoming',
-  popular: 'popular',
-  top_rated: 'top_rated',
-  now_playing: 'now_playing',
-  trending: 'week',
 }
 
 export interface GenreSkeletonProps {
@@ -208,4 +194,11 @@ export interface TFavoriteStorage {
   id: number
   title: string
   poster_path: string
+}
+
+export interface TCategoryHandlers {
+  [category: string]: {
+    fetchData: () => Promise<TResponse>
+    dispatchData: (response: TResponse) => void
+  }
 }
