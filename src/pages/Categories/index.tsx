@@ -4,37 +4,63 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import { TStore } from '@types'
-import { setByGenreMovies, setGenreMovies, setLoading, useAppDispatch } from '@redux'
+import { clearMovies, setByGenreMovies, setGenreMovies, setLoading, useAppDispatch } from '@redux'
+import { useState, useRef } from 'react'
 
 export const Categories = () => {
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(false)
   const genres = useSelector((state: TStore) => state.data.genre, shallowEqual)
   const byGenres = useSelector((state: TStore) => state.data.byGenres, shallowEqual)
   const loading = useSelector((state: TStore) => state.data.isLoader, shallowEqual)
   const dispatch = useAppDispatch()
+  const pageRef = useRef(1)
   const { id } = useParams<{ id: string }>()
   const categoryID = id ? id : ''
 
   const fetch = async () => {
-    if (!genres.length) {
-      const reply = await tmdbService.getGenreMovies()
-      reply.success && dispatch(setGenreMovies(reply.movies))
+    const params = {
+      with_genres: categoryID,
+      page: pageRef.current,
     }
 
-    const reply = await tmdbService.getMoviesByGenre(categoryID)
-    reply.success && dispatch(setByGenreMovies(reply.movies))
+    if (!genres.length) {
+      const response = await tmdbService.getGenreMovies()
+      response.success && dispatch(setGenreMovies(response.movies))
+    }
 
+    const response = await tmdbService.getMoviesByGenre(params)
+    response.success && dispatch(setByGenreMovies(response.movies.results))
+
+    setHasMore(response.movies.page < response.movies.total_pages)
     dispatch(setLoading(false))
   }
 
   useEffect(() => {
-    dispatch(setLoading(true))
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    fetch()
+    pageRef.current = 1
+    dispatch(clearMovies())
+    dispatch(setLoading(true))
   }, [categoryID])
+
+  useEffect(() => {
+    fetch()
+  }, [categoryID, page])
+
+  const handleSetPage = () => {
+    setPage((prevPage) => prevPage + 1)
+    pageRef.current += 1
+  }
 
   return (
     <>
-      <MovieGrid category="Categories" movies={byGenres} loading={loading}>
+      <MovieGrid
+        category="Categories"
+        movies={byGenres}
+        loading={loading}
+        handleSetPage={handleSetPage}
+        hasMore={hasMore}
+      >
         <MovieGenres
           className="genres__filter overflow-hidden overflow-x-auto mb-5"
           classListGenres="flex gap-3 pb-4"
