@@ -1,4 +1,4 @@
-import { TMovieDetail, TGenre, TMovie } from '@types'
+import { TMovieDetail, TGenre, TMovie, TResponse } from '@types'
 
 export interface TStore {
   data: {
@@ -47,8 +47,11 @@ export const initialState: State = {
   detailMovie: {} as TMovieDetail,
 }
 
+
+
 export type TSetFavorite = { type: 'data/setFavoritesMovies'; payload: TMovie[] }
+export type TSetTrending = { type: 'data/setTrendingMovies'; payload: TResponse }
 export type TToggleFavorite = { type: 'data/toggleFavorite'; payload: TMovie }
 export type TIsLoader = { type: 'data/setLoading'; payload: boolean }
 
-export type Action = TSetFavorite | TToggleFavorite | TIsLoader
+export type Action = TSetFavorite | TToggleFavorite | TIsLoader 

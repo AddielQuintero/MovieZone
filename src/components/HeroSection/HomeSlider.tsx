@@ -19,8 +19,8 @@ export const HomeSlider = () => {
   const dispatch = useAppDispatch()
 
   const fetchTopRated = async () => {
-    const topRated = await tmdbService.getListMovies('now_playing', 0, 6)
-    topRated.success && dispatch(setNowPlayingMovies(topRated.movies))
+    const topRated = await tmdbService.getListMovies('now_playing')
+    topRated.success && dispatch(setNowPlayingMovies(topRated.movies.results.slice(0, 6)))
     // dispatch(setLoading(false))
   }
 

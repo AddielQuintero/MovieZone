@@ -1,21 +1,24 @@
 import { shallowEqual, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MovieGrid } from '@components'
 import { tmdbService } from '@services'
 import { NotFound } from '@pages'
 import { useQueryParams } from '@hooks'
-import { TMovie, TSelectors, TStore } from '@types'
-import { setBySearchMovies, setLoading, setPopularMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
+import { TMovie, TSelectors, TStore, TResponse, TMovieResponse, ParamsProps } from '@types'
+import { clearMovies, setBySearchMovies, setLoading, setPopularMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 
 export const MovieGridPage = () => {
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(false)
   const loading = useSelector((state: TStore) => state.data.isLoader, shallowEqual)
   const { category, keyword } = useQueryParams()
+  const pageRef = useRef(1)
   const dispatch = useAppDispatch()
-  
+
   if (!category && !keyword) return <NotFound />
 
   const selectors: TSelectors = {
-    trending: useSelector((state: TStore) => state.data.trending, shallowEqual),
+    trending: useSelector((state: TStore) => state.data.trending),
     popular: useSelector((state: TStore) => state.data.popular, shallowEqual),
     upcoming: useSelector((state: TStore) => state.data.upcoming, shallowEqual),
     favorites: useSelector((state: TStore) => state.data.favorites, shallowEqual),
@@ -25,40 +28,103 @@ export const MovieGridPage = () => {
   const movies: TMovie[] = selectors[category as keyof TSelectors] || selectors.bySearch
 
   const fetch = async () => {
-    let response = { success: false, movies: [] }
+    let response: TResponse = { success: false, movies: {} as TMovieResponse }
+    const params: ParamsProps = {
+      page: pageRef.current,
+      query: keyword,
+    }
 
     if (keyword === null) {
       switch (category) {
         case 'trending':
-          response = await tmdbService.getTrendingMovies()
-          response.success && dispatch(setTrendingMovies(response.movies))
+          response = await tmdbService.getTrendingMovies(params)
+          response.success && dispatch(setTrendingMovies(response.movies.results))
           break
         case 'popular':
-          response = await tmdbService.getListMovies('popular')
-          response.success && dispatch(setPopularMovies(response.movies))
+          response = await tmdbService.getListMovies('popular', params)
+          response.success && dispatch(setPopularMovies(response.movies.results))
           break
         case 'upcoming':
-          response = await tmdbService.getListMovies('upcoming')
-          response.success && dispatch(setUpcomingMovies(response.movies))
+          response = await tmdbService.getListMovies('upcoming', params)
+          response.success && dispatch(setUpcomingMovies(response.movies.results))
           break
       }
     } else {
-      response = await tmdbService.getMoviesBySearch(keyword)
-      response.success && dispatch(setBySearchMovies(response.movies))
+      response = await tmdbService.getMoviesBySearch(params)
+      response.success && dispatch(setBySearchMovies(response.movies.results))
     }
 
+    setHasMore(response.movies.page < response.movies.total_pages)
     dispatch(setLoading(false))
   }
 
+  // const fetch = async () => {
+  //   let response: TResponse = { success: false, movies: {} as TMovieResponse }
+  //   const params: ParamsProps = {
+  //     page: pageRef.current,
+  //     query: keyword,
+  //   }
+
+  //   const categoryHandlers: TCategoryHandlers = {
+  //     trending: {
+  //       fetchData: () => tmdbService.getTrendingMovies(params),
+  //       dispatchData: (response) => response.success && dispatch(setTrendingMovies(response.movies.results)),
+  //     },
+  //     popular: {
+  //       fetchData: () => tmdbService.getListMovies('popular', params),
+  //       dispatchData: (response) => response.success && dispatch(setPopularMovies(response.movies.results)),
+  //     },
+  //     upcoming: {
+  //       fetchData: () => tmdbService.getListMovies('upcoming', params),
+  //       dispatchData: (response) => response.success && dispatch(setUpcomingMovies(response.movies.results)),
+  //     },
+  //     bySearch: {
+  //       fetchData: () => tmdbService.getMoviesBySearch(params),
+  //       dispatchData: (response) => response.success && dispatch(setBySearchMovies(response.movies.results)),
+  //     },
+  //   }
+
+  //   if(keyword === null){
+  //     if(category && category in categoryHandlers){
+  //       const categoryHandler =  categoryHandlers[category]
+  //       response = await categoryHandler.fetchData()
+  //       categoryHandler.dispatchData(response)
+  //     }
+  //   }else {
+  //     response = await categoryHandlers.bySearch.fetchData()
+  //     categoryHandlers.bySearch.dispatchData(response)
+  //   }
+
+  //   setHasMore(response.movies.page < response.movies.total_pages)
+  //   dispatch(setLoading(false))
+  // }
+
   useEffect(() => {
-    dispatch(setLoading(true))
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    fetch()
+    pageRef.current = 1
+    dispatch(clearMovies())
+    dispatch(setLoading(true))
   }, [category, keyword])
+
+  useEffect(() => {
+    fetch()
+  }, [category, keyword, page])
+
+  const handleSetPage = () => {
+    setPage((prevPage) => prevPage + 1)
+    pageRef.current += 1
+  }
 
   return (
     <>
-      <MovieGrid category={category} keyword={keyword} movies={movies} loading={loading} />
+      <MovieGrid
+        category={category}
+        keyword={keyword}
+        movies={movies}
+        loading={loading}
+        handleSetPage={handleSetPage}
+        hasMore={hasMore}
+      />
     </>
   )
 }

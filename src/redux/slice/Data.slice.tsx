@@ -9,13 +9,16 @@ export const DataSlice = createSlice({
       state.isLoader = action.payload
     },
     setTrendingMovies: (state, action) => {
-      state.trending = action.payload
+      state.trending = [...state.trending, ...action.payload]
+      // state.trending = !state.trending.length ? action.payload : [...state.trending, ...action.payload]
     },
     setPopularMovies: (state, action) => {
-      state.popular = action.payload
+      state.popular = [...state.popular, ...action.payload]
+      // state.popular = !state.popular.length ? action.payload : [...state.popular, ...action.payload]
     },
     setUpcomingMovies: (state, action) => {
-      state.upcoming = action.payload
+      state.upcoming = [...state.upcoming, ...action.payload]
+      // state.upcoming = !state.upcoming.length ? action.payload : [...state.upcoming, ...action.payload]
     },
     setDetailMovies: (state, action) => {
       state.detailMovie = action.payload
@@ -27,10 +30,11 @@ export const DataSlice = createSlice({
       state.genre = action.payload
     },
     setByGenreMovies: (state, action) => {
-      state.byGenres = action.payload
+      state.byGenres = [...state.byGenres ,...action.payload]
     },
     setBySearchMovies: (state, action) => {
-      state.bySearch = action.payload
+      state.bySearch = [... state.bySearch, ...action.payload]
+      // state.bySearch = !state.bySearch.length ? action.payload : [...state.bySearch, ...action.payload]
     },
     setNowPlayingMovies: (state, action) => {
       state.nowPlaying = action.payload
@@ -50,6 +54,13 @@ export const DataSlice = createSlice({
       localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
       state.favorites = favorites
     },
+    clearMovies: (state) => {
+      state.trending = []
+      state.popular = []
+      state.upcoming = []
+      state.byGenres = []
+      state.bySearch = []
+    },
   },
 })
 
@@ -67,6 +78,7 @@ export const {
   setSimilarMovies,
   setFavoritesMovies,
   toggleFavorite,
+  clearMovies
 } = DataSlice.actions
 
 export default DataSlice.reducer
