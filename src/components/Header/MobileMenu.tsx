@@ -3,7 +3,7 @@ import { Drawer, Typography, IconButton } from '@material-tailwind/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MobileMenuProps } from '@types'
 import { Link } from 'react-router-dom'
-import { CustomLinkList, CustomSearch } from '@components'
+import { CustomLinkList, CustomSearch, LanguageSwitcher } from '@components'
 
 export const MobileMenu = (props: MobileMenuProps) => {
   const { navigation, open, onClose, closeDrawer } = props
@@ -25,7 +25,7 @@ export const MobileMenu = (props: MobileMenuProps) => {
 
         <div className="container__drawer divide-y divide-pink-200 overflow-y-scroll h-[calc(100%-70px)]">
           <div className="px-4 pt-1 pb-5">
-            <CustomSearch onClose={onClose}/>
+            <CustomSearch onClose={onClose} />
           </div>
 
           <div className="space-y-2">
@@ -40,6 +40,10 @@ export const MobileMenu = (props: MobileMenuProps) => {
                 }
               />
             </div>
+          </div>
+
+          <div className='p-2'>
+            <LanguageSwitcher mobile  handleClose={closeDrawer}/>
           </div>
         </div>
       </Drawer>

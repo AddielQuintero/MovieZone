@@ -2,7 +2,7 @@ import { Navbar, Typography, IconButton } from '@material-tailwind/react'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { NavigateProps } from '@types'
 import { Link } from 'react-router-dom'
-import { CustomLinkList, CustomSearch, MobileMenu } from '@components'
+import { CustomLinkList, CustomSearch, MobileMenu, LanguageSwitcher } from '@components'
 import { useToggle } from '@hooks'
 
 export const NavBar = ({ navigation }: { navigation: NavigateProps }) => {
@@ -42,7 +42,8 @@ export const NavBar = ({ navigation }: { navigation: NavigateProps }) => {
             />
           </div>
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex lg:gap-x-4">
+            <LanguageSwitcher />
             <CustomSearch />
           </div>
         </div>
