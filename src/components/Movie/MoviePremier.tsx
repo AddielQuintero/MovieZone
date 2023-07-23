@@ -3,13 +3,13 @@ import { MovieCard, MoviePremiereSkeleton } from '@components'
 import { Typography } from '@material-tailwind/react'
 import { useLocalStorage } from '@hooks'
 
-export const MoviePremier = ({ ratedMovie, classTypography, variant }: MoviePremierProps) => {
-  const {isFavorite, handleFavorite} = useLocalStorage()
-  
+export const MoviePremier = ({ ratedMovie, classTypography, variant, t }: MoviePremierProps) => {
+  const { isFavorite, handleFavorite } = useLocalStorage()
+
   return (
     <div className="premier mt-10">
       <Typography className={classTypography} variant={variant}>
-        Top Rated
+        {t('lang.topRated')}
       </Typography>
       <div className="premier_container grid grid-cols-2 md:grid-cols-3 gap-4">
         {!ratedMovie.length ? (

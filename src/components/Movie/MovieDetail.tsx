@@ -5,7 +5,7 @@ import { MovieDetailProps } from '@types'
 import { formatRuntime } from '@utilities'
 import { useLocalStorage } from '@hooks'
 
-export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
+export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
   const formattedDate = detailMovie.release_date.slice(0, 4)
   const formattedRuntime = formatRuntime(detailMovie.runtime)
@@ -20,7 +20,7 @@ export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
             className="flex items-center gap-1 text-pink-400 align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-1.5 px-4 rounded-lg border border-pink-500  hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] "
             classIcon="h-5 w-5 inline"
             classTypography="font-bold text-xs"
-            title="Go Back"
+            title={`${t('lang.goBack')}`}
             redirect="-1"
             IconComponent={ArrowLongLeftIcon}
           />
@@ -51,7 +51,7 @@ export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
               classIcon="h-5 w-5"
               color="indigo"
               IconComponent={PlayIcon}
-              name="Play Trailer"
+              name={`${t('lang.playTrailer')}`}
             />
           </div>
 
@@ -66,6 +66,7 @@ export const MovieDetail = ({ detailMovie, loading }: MovieDetailProps) => {
             variant="h4"
             value={2}
             title
+            t={t}
           />
         </div>
       </div>

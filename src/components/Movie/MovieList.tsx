@@ -4,22 +4,24 @@ import { MovieCard, LinkButton, MovieListSkeleton } from '@components'
 import { MovieListProps } from '@types'
 import 'swiper/swiper-bundle.min.css'
 import { useLocalStorage } from '@hooks'
+import { useTranslation } from 'react-i18next'
 
 export const MovieList = ({ title, redirect, movies, loading }: MovieListProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
-  const isEmpty = title === 'Similar Movies' ? 'No similar movies at the moment.' : 'No movies available at the moment.'
+  const [t] = useTranslation('global')
+  const isEmpty = title === t('lang.similarMovies') ? t('lang.noSimilar') : t('lang.noMovies')
 
   return (
     <section className="movie__list ">
       <div className="flex justify-between items-center mb-2">
-        <Typography variant="h3" className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400">
+        <Typography variant="h3" className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400 md:text-[27px]">
           {title}
         </Typography>
         {redirect && (
           <LinkButton
             className="flex items-center gap-1  py-2 px-4 text-pink-400 align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none rounded-lg border border-pink-500  hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85]"
             classTypography="font-bold text-xs"
-            title="See More"
+            title={`${t('lang.seeMore')}`}
             redirect={`/movies/${redirect}`}
           />
         )}

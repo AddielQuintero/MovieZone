@@ -1,4 +1,6 @@
+import { QueryParamProps } from "@types"
 import { color } from "@material-tailwind/react/types/components/button"
+import { TFunction } from 'i18next'
 
 export interface ClassNameProps {
   className?: string
@@ -23,4 +25,8 @@ export interface IconicButtonProps extends ClassNameProps {
   name?: string
   onClick?: ()=> void
   refButton?: React.Ref<HTMLButtonElement>
+}
+
+export interface PageHeaderProps extends QueryParamProps{
+  t: TFunction
 }

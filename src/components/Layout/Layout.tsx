@@ -1,13 +1,14 @@
 import { Provider } from 'react-redux'
 import { store } from '@redux'
 import { NavBar } from '@components'
-import { navigation } from '@types'
+import { getNavigation } from '@types'
 
 interface LayoutProps {
   children: React.ReactNode
 }
 
 export const Layout = ({ children }: LayoutProps) => {
+  const navigation = getNavigation()
   return (
     <Provider store={store}>
       <div className="layout">

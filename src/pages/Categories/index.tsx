@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 import { TStore } from '@types'
 import { clearMovies, setByGenreMovies, setGenreMovies, setLoading, useAppDispatch } from '@redux'
 import { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const Categories = () => {
   const [page, setPage] = useState(1)
@@ -17,19 +18,17 @@ export const Categories = () => {
   const pageRef = useRef(1)
   const { id } = useParams<{ id: string }>()
   const categoryID = id ? id : ''
+  const [t] = useTranslation('global')
 
   const fetch = async () => {
     const params = {
       with_genres: categoryID,
       page: pageRef.current,
+      language: `${t('lang.langAPI')}`,
     }
-
-    if (!genres.length) {
-      const response = await tmdbService.getGenreMovies()
-      response.success && dispatch(setGenreMovies(response.movies))
-    }
-
+    const genres = await tmdbService.getGenreMovies(params)
     const response = await tmdbService.getMoviesByGenre(params)
+    genres.success && dispatch(setGenreMovies(genres.movies))
     response.success && dispatch(setByGenreMovies(response.movies.results))
 
     setHasMore(response.movies.page < response.movies.total_pages)
@@ -41,11 +40,11 @@ export const Categories = () => {
     pageRef.current = 1
     dispatch(clearMovies())
     dispatch(setLoading(true))
-  }, [categoryID])
+  }, [categoryID, t])
 
   useEffect(() => {
     fetch()
-  }, [categoryID, page])
+  }, [categoryID, page, t])
 
   const handleSetPage = () => {
     setPage((prevPage) => prevPage + 1)
@@ -55,7 +54,8 @@ export const Categories = () => {
   return (
     <>
       <MovieGrid
-        category="Categories"
+        category='categories'
+        keyword={null}
         movies={byGenres}
         loading={loading}
         handleSetPage={handleSetPage}
@@ -73,6 +73,7 @@ export const Categories = () => {
           variant="h3"
           value={20}
           redirect
+          t={t}
         />
       </MovieGrid>
     </>
