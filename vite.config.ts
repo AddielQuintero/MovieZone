@@ -19,6 +19,7 @@ export default defineConfig({
       '@config': path.resolve(__dirname, 'src/config/'),
       '@types': path.resolve(__dirname, 'src/types'),
       '@utilities': path.resolve(__dirname, 'src/utilities'),
+      '@locales': path.resolve(__dirname, 'src/locales'),
       '@public': path.resolve(__dirname, './public/'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@sass': path.resolve(__dirname, 'src/sass'),

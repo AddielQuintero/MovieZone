@@ -1,0 +1,29 @@
+{
+  "lang":{
+    "langAPI": "es-ES",
+    "langAPITrailer": "es-ES",
+    "home": "Inicio",
+    "trending": "Tendencias",
+    "categories": "Categorías",
+    "popular": "Popular",
+    "upcoming": "Próximamente",
+    "favorites": "Favoritos",
+    "playTrailer": "Ver trailer",
+    "details": "Detalles",
+    "movie": "Pelicula",
+    "search": "Búsqueda...",
+    "goBack": "Volver",
+    "similarMovies": "Películas Similares",
+    "topRated": "Más Valorados",
+    "released": "Publicado en",
+    "madeWith": "Hecho con",
+    "by": "por",
+    "allRightsReserved": "Todos los derechos reservados",
+    "seeMore": "Ver Mas",
+    "noSimilar": "No hay películas similares en este momento.",
+    "noMovies": "No hay películas disponibles en este momento.",
+    "noResult": "No hay resultados",
+    "noExist": "Esta pelicula no existe.",
+    "noTrailer": "No se encontraron trailers en este idioma"
+  }
+}

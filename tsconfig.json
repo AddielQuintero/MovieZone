@@ -35,6 +35,7 @@
       "@config": ["src/config/"],
       "@types": ["src/types/"],
       "@utilities": ["src/utilities/"],
+      "@locales": ["src/locales/"],
       "@public": ["public/"],
       "@assets": ["src/assets/"],
       "@sass": ["src/sass/"]
