@@ -1,13 +1,13 @@
-import { Typography } from '@material-tailwind/react'
-import { ArrowLongLeftIcon } from '@heroicons/react/24/outline'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Spinner } from '@material-tailwind/react'
-import { UpButton, LinkButton, MovieCard, MovieCardSkeleton } from '@components'
+import { UpButton,  MovieCard, MovieCardSkeleton, PageHeader } from '@components'
 import { MovieGridProps } from '@types'
 import { useLocalStorage } from '@hooks'
+import { useTranslation } from 'react-i18next'
 
 export const MovieGrid = ({ category, keyword, movies, children, loading, handleSetPage, hasMore }: MovieGridProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
+  const [t] = useTranslation('global')
 
   return (
     <>
@@ -22,22 +22,7 @@ export const MovieGrid = ({ category, keyword, movies, children, loading, handle
         }
       >
         <section className="movie__grid gap-x-5 md:gap-x-9 lg:gap-x-12 w-full max-w-[1536px]  mx-auto mt-9 px-5 pb-5 sm:max-2xl:px-[5vw]">
-          <div className="flex justify-between items-center mb-2 gap-5">
-            <Typography
-              variant="h3"
-              className="mr-2 cursor-pointer py-1.5 font-bold text-pink-400 capitalize w-[58%] md:w-[78%] break-words "
-            >
-              {category || keyword}
-            </Typography>
-            <LinkButton
-              className="flex items-center gap-1 text-pink-400 align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-1.5 px-4 rounded-lg border border-pink-500  hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] "
-              classIcon="h-5 w-5 inline"
-              classTypography="font-bold text-xs"
-              title="Go Back"
-              redirect="-1"
-              IconComponent={ArrowLongLeftIcon}
-            />
-          </div>
+          <PageHeader category={category} keyword={keyword} t={t} />
 
           {children}
 
@@ -66,7 +51,7 @@ export const MovieGrid = ({ category, keyword, movies, children, loading, handle
           {!movies.length && !loading && (
             <div className="flex justify-center items-start flex-wrap mt-10">
               <div className="p-4 rounded-md bg-gray-300 text-pink-400 text-center">
-                <h1>No movies available at the moment.</h1>
+                <h1>{t('lang.noMovies')}</h1>
               </div>
             </div>
           )}
