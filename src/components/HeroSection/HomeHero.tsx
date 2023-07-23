@@ -4,7 +4,7 @@ import { Typography } from '@material-tailwind/react'
 import { CONFIG } from '@config'
 import { MovieProps } from '@types'
 
-export const HomeHero = ({ movies, favorite, handleFavorite }: MovieProps) => {
+export const HomeHero = ({ movies, favorite, t, handleFavorite }: MovieProps) => {
   const background = CONFIG.originalImage(movies.backdrop_path)
   const formattedDate = movies.release_date.slice(0, 4)
 
@@ -44,14 +44,14 @@ export const HomeHero = ({ movies, favorite, handleFavorite }: MovieProps) => {
                 classIcon="h-5 w-5"
                 color="indigo"
                 IconComponent={PlayIcon}
-                name="Play Trailer"
+                name={`${t('lang.playTrailer')}`}
               />
             </div>
             <LinkButton
               className="flex items-center gap-3 px-4 py-[.57rem] sm:py-2 font-bold text-xs align-middle select-none font-sans  text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none rounded-lg bg-blue-gray-500 text-white shadow-md shadow-blue-gray-500/20 hover:shadow-lg hover:shadow-blue-gray-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
               classIcon="h-5 w-5"
               classTypography="hidden sm:block font-bold"
-              title="Detail"
+              title={`${t('lang.details')}`}
               redirect={`/movie/${movies.id}`}
               IconComponent={InformationCircleIcon}
             />

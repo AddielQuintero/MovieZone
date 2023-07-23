@@ -1,14 +1,15 @@
 import Slider from 'react-slick'
 import { useEffect, useRef, useState } from 'react'
-import { TStore } from '@types'
+import { ParamsProps, TStore } from '@types'
 import { HomeHero, HomeHeroSkeleton, MovieBackgroundImage } from '@components'
 import { CONFIG } from '@config'
 import { tmdbService } from '@services'
 import { setNowPlayingMovies, useAppDispatch } from '@redux'
 import { useSelector } from 'react-redux'
 import { useLocalStorage } from '@hooks'
+import { TFunction } from 'i18next'
 
-export const HomeSlider = () => {
+export const HomeSlider = ({ t }: { t: TFunction }) => {
   const nowPlaying = useSelector((state: TStore) => state.data.nowPlaying)
   const { isFavorite, handleFavorite } = useLocalStorage()
 
@@ -19,7 +20,10 @@ export const HomeSlider = () => {
   const dispatch = useAppDispatch()
 
   const fetchTopRated = async () => {
-    const topRated = await tmdbService.getListMovies('now_playing')
+    const params: ParamsProps = {
+      language: `${t('lang.langAPI')}`,
+    }
+    const topRated = await tmdbService.getListMovies('now_playing', params)
     topRated.success && dispatch(setNowPlayingMovies(topRated.movies.results.slice(0, 6)))
     // dispatch(setLoading(false))
   }
@@ -36,7 +40,7 @@ export const HomeSlider = () => {
   }
   useEffect(() => {
     fetchTopRated()
-  }, [])
+  }, [t])
 
   useEffect(() => {
     if (slider1Ref.current && slider2Ref.current) {
@@ -106,6 +110,7 @@ export const HomeSlider = () => {
           <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">
             {nowPlaying.map((movie, index) => (
               <HomeHero
+                t={t}
                 key={index}
                 movies={movie}
                 favorite={isFavorite(movie.id)}

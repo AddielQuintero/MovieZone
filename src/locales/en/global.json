@@ -1,0 +1,29 @@
+{
+  "lang":{
+    "langAPI": "en",
+    "langAPITrailer": "en",
+    "home": "Home",
+    "trending": "Trending",
+    "categories": "Categories",
+    "popular": "Popular",
+    "upcoming": "Upcoming",
+    "favorites": "Favorites",
+    "playTrailer": "Play Trailer",
+    "details": "Details",
+    "movie": "Movie",
+    "search": "Search...",
+    "goBack": "Go Back",
+    "similarMovies": "Similar Movies",
+    "topRated": "Top Rated",
+    "released": "Released",
+    "madeWith": "Made with",
+    "by": "by",
+    "allRightsReserved": "All rights reserved",
+    "seeMore": "See More",
+    "noSimilar": "No similar movies at the moment.",
+    "noMovies": "No movies available at the moment.",
+    "noResult": "There aren't results",
+    "noExist": "This movie does not exist.",
+    "noTrailer": "There aren't trailers in this language"
+  }
+}

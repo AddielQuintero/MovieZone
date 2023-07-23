@@ -2,11 +2,13 @@ import { IconButton, Input } from '@material-tailwind/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useState, useRef, ChangeEventHandler, FormEventHandler } from 'react'
 import { useNavigate  } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
+  const [t] = useTranslation('global')
 
   const handleOnChange: ChangeEventHandler<HTMLInputElement> = ({ target: { value } }) => {
     setValue(value)
@@ -27,7 +29,7 @@ export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
       <Input
         inputRef={inputRef}
         type="search"
-        label="Search..."
+        label={`${t('lang.search')}`}
         color="pink"
         className="pr-10 min-w-[230px]"
         value={value}

@@ -30,6 +30,7 @@ export const MovieType: TMovieType = {
 }
 
 export interface ParamsProps extends AxiosRequestConfig  {
-  page: number
+  page?: number
   query?: string | null
+  language: string
 }

@@ -1,5 +1,6 @@
 import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { MovieGrid } from '@components'
 import { tmdbService } from '@services'
 import { NotFound } from '@pages'
@@ -14,6 +15,7 @@ export const MovieGridPage = () => {
   const { category, keyword } = useQueryParams()
   const pageRef = useRef(1)
   const dispatch = useAppDispatch()
+  const [t] = useTranslation('global')
 
   if (!category && !keyword) return <NotFound />
 
@@ -32,6 +34,7 @@ export const MovieGridPage = () => {
     const params: ParamsProps = {
       page: pageRef.current,
       query: keyword,
+      language: `${t('lang.langAPI')}`,
     }
 
     if (keyword === null) {
@@ -104,11 +107,11 @@ export const MovieGridPage = () => {
     pageRef.current = 1
     dispatch(clearMovies())
     dispatch(setLoading(true))
-  }, [category, keyword])
+  }, [category, keyword, t])
 
   useEffect(() => {
     fetch()
-  }, [category, keyword, page])
+  }, [category, keyword, page, t])
 
   const handleSetPage = () => {
     setPage((prevPage) => prevPage + 1)

@@ -1,6 +1,6 @@
 import { ClassNameProps, TResponse } from '@types'
 import { colors } from '@material-tailwind/react/types/generic'
-
+import { TFunction } from 'i18next'
 export interface TMovie {
   adult: boolean
   backdrop_path: string
@@ -47,18 +47,22 @@ export interface TMovieDetail {
   vote_count: number
 }
 
-export interface MovieProps {
+export interface TFunctionProps {
+  t: TFunction
+}
+
+export interface MovieProps extends TFunctionProps{
   movies: TMovie
   favorite: boolean
   handleFavorite: () => void
 }
 
-export interface MovieDetailProps {
+export interface MovieDetailProps extends TFunctionProps{
   detailMovie: TMovieDetail
   loading?: boolean
 }
 
-export interface MoviePremierProps extends ClassNameProps {
+export interface MoviePremierProps extends ClassNameProps, TFunctionProps {
   ratedMovie: TMovie[]
 }
 
@@ -69,9 +73,12 @@ export interface MovieListProps {
   loading: boolean
 }
 
-export interface MovieGridProps {
+export interface QueryParamProps {
   category?: string
   keyword?: string | null
+}
+
+export interface MovieGridProps extends QueryParamProps {
   movies: TMovie[]
   children?: React.ReactNode
   loading: boolean
@@ -107,7 +114,7 @@ export interface MovieImageProps extends ClassNameProps {
   backdrop_path?: string
 }
 
-export interface MovieGenreProps extends ClassNameProps, GenreSkeletonProps {
+export interface MovieGenreProps extends ClassNameProps, GenreSkeletonProps, TFunctionProps {
   genres: Genre[]
   classChip?: string
   redirect?: boolean
@@ -201,4 +208,8 @@ export interface TCategoryHandlers {
     fetchData: () => Promise<TResponse>
     dispatchData: (response: TResponse) => void
   }
+}
+
+export interface TTranslations {
+  [category: string]: string
 }
