@@ -4,10 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { LanguageSwitcherProps, language } from '@types'
 
 export const LanguageSwitcher = ({ mobile, handleClose }: LanguageSwitcherProps) => {
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState(() => {
+    const storedLang = localStorage.getItem('LANGUAGE')
+    return storedLang ? JSON.parse(storedLang) : 'en'
+  })
   const { i18n } = useTranslation('global')
 
   const handleChangeLanguage = (value: string) => {
+    localStorage.setItem('LANGUAGE', JSON.stringify(value))
     setLang(value)
     i18n.changeLanguage(value)
     handleClose && handleClose()

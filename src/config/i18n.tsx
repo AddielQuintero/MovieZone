@@ -2,8 +2,10 @@ import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { global_en, global_es } from '@locales'
 
+const storedLang = localStorage.getItem('LANGUAGE')
+
 i18next.use(initReactI18next).init({
-  lng: 'en',
+  lng: `${storedLang ? JSON.parse(storedLang) : 'en'}`,
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
   resources: {
