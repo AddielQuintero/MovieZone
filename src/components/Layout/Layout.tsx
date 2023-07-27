@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const navigation = getNavigation()
   return (
     <Provider store={store}>
-      <div className="layout">
+      <div className="layout pb-8 ">
         <NavBar navigation={navigation} />
         {children}
       </div>
