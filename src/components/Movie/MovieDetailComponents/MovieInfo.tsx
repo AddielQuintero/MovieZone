@@ -11,11 +11,11 @@ export const MovieInfo = ({ average, runtime, date, className, children }: Movie
       </Typography>
       {runtime && (
         <Typography variant="paragraph" className={`flex gap-1 items-center ${className} `}>
-          <ClockIcon className="h-5 w-5  text-pink-400 mb-1" /> {runtime}
+          <ClockIcon className="h-5 w-5  text-pink-400 dark:text-pink-300 mb-1" /> {runtime}
         </Typography>
       )}
       <Typography variant="paragraph" className={`flex gap-1 items-center ${className} `}>
-        <StarIcon className="h-5 w-5  text-pink-400 mb-1" /> {`${average.toFixed(1)}/10`}
+        <StarIcon className="h-5 w-5  text-pink-400 dark:text-pink-300 mb-1" /> {`${average.toFixed(1)}/10`}
       </Typography>
       {children}
     </div>

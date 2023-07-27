@@ -17,7 +17,7 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
       <div className="flex flex-col w-full h-full col-span-2">
         <div className="hidden md:flex justify-end pb-10">
           <LinkButton
-            className="flex items-center gap-1 text-pink-400 align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-1.5 px-4 rounded-lg border border-pink-500  hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] "
+            className="flex items-center gap-1 text-pink-400 dark:text-pink-300 align-middle select-none font-sans text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-1.5 px-4 rounded-lg border border-pink-400 dark:border-pink-300  hover:opacity-75 focus:ring focus:ring-pink-200 active:opacity-[0.85] "
             classIcon="h-5 w-5 inline"
             classTypography="font-bold text-xs"
             title={`${t('lang.goBack')}`}
@@ -27,20 +27,20 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
         </div>
 
         <div className="summary ">
-          <MovieInfo average={detailMovie.vote_average} runtime={formattedRuntime} date={formattedDate}>
+          <MovieInfo average={detailMovie.vote_average} runtime={formattedRuntime} date={formattedDate} className='dark:text-gray-200'>
             <MovieFavorite
               handleFavorite={() => handleFavorite(detailMovie.id, detailMovie.title, detailMovie.poster_path) }
               favorite={isFavorite(detailMovie.id)}
               classButton="h-5 w-5"
-              classIcon="h-5 w-5 text-indigo-500"
+              classIcon="h-5 w-5 text-indigo-500 dark:text-gray-200"
             />
           </MovieInfo>
 
           <div className="my-2">
-            <Typography className="" variant="h4">
+            <Typography className="dark:text-gray-100" variant="h4">
               {detailMovie.title}
             </Typography>
-            <Typography className="mt-4" variant="paragraph">
+            <Typography className="mt-4 dark:text-gray-200" variant="paragraph">
               {detailMovie.overview}
             </Typography>
           </div>
@@ -56,7 +56,7 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
           </div>
 
           <MovieGenres
-            className="genres__detail"
+            className="genres__detail dark:text-gray-100"
             classListGenres="flex items-end flex-wrap gap-2 pt-2"
             classChip="bg-blue-gray-800"
             classSkeleton="flex flex-wrap gap-4"

@@ -41,9 +41,9 @@ export const MovieGrid = ({ category, keyword, movies, children, loading, handle
                     className="test bg-inherit relative grid auto-rows-min w-full h-full rounded-none items-start"
                     classHeader="relative pt-[150%] inset-0 m-0 w-full rounded-2xl bg-cover"
                     classFooter="flex items-start gap-2 justify-between w-full p-2"
-                    classTypography="text-sm"
+                    classTypography="text-sm dark:text-gray-200"
                     classButton="h-5 w-5"
-                    classIcon="h-5 w-5 text-indigo-500"
+                    classIcon="h-5 w-5 text-indigo-500 dark:text-gray-200"
                   />
                 )
             )}

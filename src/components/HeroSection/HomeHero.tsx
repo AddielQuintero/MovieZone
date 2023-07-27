@@ -18,21 +18,21 @@ export const HomeHero = ({ movies, favorite, t, handleFavorite }: MovieProps) =>
 
       <div className="relative max-w-2xl ">
         <div className="sm:mb-8 flex">
-          <MovieInfo average={movies.vote_average} date={formattedDate} className="text-gray-800 font-bold">
+          <MovieInfo average={movies.vote_average} date={formattedDate} className="text-gray-800 dark:text-gray-200 font-bold">
             <MovieFavorite
               handleFavorite={handleFavorite}
               favorite={favorite}
               classButton="h-5 w-5"
-              classIcon="h-5 w-5 text-indigo-500"
+              classIcon="h-5 w-5 text-indigo-500 dark:text-gray-200"
             />
           </MovieInfo>
         </div>
         <div className="mt-2">
-          <Typography className="text-3xl font-bold tracking-tight text-gray-800 md:text-5xl" variant="h3">
+          <Typography className="text-3xl font-bold tracking-tight text-gray-800 dark:text-gray-200 md:text-5xl" variant="h3">
             {movies.title}
           </Typography>
           <Typography
-            className="pt-4 text-lg leading-8 hidden sm:line-clamp-3 text-gray-800 max-w-[25rem]"
+            className="pt-4 text-lg leading-8 hidden sm:line-clamp-3 text-gray-800 dark:text-gray-200 max-w-[25rem]"
             variant="paragraph"
           >
             {movies.overview}
