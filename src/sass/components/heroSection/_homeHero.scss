@@ -29,8 +29,16 @@ $bottomOverlay: '@assets/bottom-overlay.png';
   width: 100%;
   height: 100%;
   background: url($bottomOverlay) repeat-x center bottom;
-  
+
   @media (min-width: 1024px) {
     // background: url(../assets/bottom-overlay.png) repeat-x center bottom;
   }
+}
+
+.dark .home__hero .BackgroundImage::before {
+  background: linear-gradient(to left, transparent, #1a1f26);
+}
+
+.dark .BackgroundImage::after {
+  background: linear-gradient(to bottom, transparent, #1a1f26) no-repeat;
 }

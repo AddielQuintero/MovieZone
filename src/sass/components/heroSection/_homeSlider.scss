@@ -10,6 +10,10 @@
   background: linear-gradient(to bottom, transparent, white) no-repeat;
 }
 
+.dark .item__reflection::after {
+  background: linear-gradient(to bottom, transparent, #1a1f26) no-repeat;
+}
+
 .slick-current .item,
 .slick-current .item__reflection img {
   padding-top: 0;

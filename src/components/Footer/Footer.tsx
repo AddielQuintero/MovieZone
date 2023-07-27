@@ -7,14 +7,14 @@ export const Footer = () => {
   const [t] = useTranslation('global')
 
   return (
-    <footer className="relative w-full mt-8">
+    <footer className="relative w-full">
       <div className="mx-auto w-full px-8">
-        <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-500 py-4 md:flex-row md:justify-between">
-          <Typography variant="small" className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0">
+        <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-500 dark:border-gray-200 py-4 md:flex-row md:justify-between">
+          <Typography variant="small" className="mb-4 text-center font-normal text-blue-gray-900 dark:text-gray-200 md:mb-0">
             &copy; {currentYear} {t('lang.madeWith')} <HeartIcon className="h-5 w-5 text-indigo-400 inline" /> {t('lang.by')}{' '}
             <span>Addiel. {t('lang.allRightsReserved')}</span>
           </Typography>
-          <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+          <div className="flex gap-4 text-blue-gray-900 dark:text-gray-200 sm:justify-center">
             <Typography as="a" href="#" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path

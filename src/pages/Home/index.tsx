@@ -1,14 +1,6 @@
 import { shallowEqual, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import {
-  setGenreMovies,
-  setLoading,
-  setPopularMovies,
-  setTopRatedMovies,
-  setTrendingMovies,
-  setUpcomingMovies,
-  useAppDispatch,
-} from '@redux'
+import { setGenreMovies, setLoading, setPopularMovies, setTopRatedMovies, setTrendingMovies, setUpcomingMovies, useAppDispatch } from '@redux'
 import { MovieList, HomeSlider, MovieGenres, MoviePremier, UpButton } from '@components'
 import { tmdbService } from '@services'
 import { ParamsProps, TStore } from '@types'
@@ -51,7 +43,7 @@ export const Home = () => {
   return (
     <>
       <HomeSlider t={t} />
-      <section className="movie flex flex-col gap-x-5 md:gap-x-9 lg:gap-x-12 w-full max-w-[1536px]  mx-auto mt-9 px-5 pb-5 sm:max-2xl:px-[5vw]">
+      <section className="dark:bg-slate-950 movie flex flex-col gap-x-5 md:gap-x-9 lg:gap-x-12 w-full max-w-[1536px]  mx-auto pt-9 px-5 pb-5 sm:max-2xl:px-[5vw]">
         <main className="movie__main flex flex-col gap-y-8 w-full lg:w-[73%] xl:w-[78%] 2xl:w-[83%] ">
           <MovieList title={`${t('lang.trending')}`} redirect="trending" movies={trending} loading={loading}/>
           <MovieList title={`${t('lang.popular')}`} redirect="popular" movies={popular} loading={loading} />
@@ -61,10 +53,10 @@ export const Home = () => {
           <MovieGenres
             className="genres__home"
             classListGenres="flex flex-wrap gap-3"
-            classTypography="mb-2 py-1.5 font-bold text-pink-400 md:text-[27px]"
-            classChip="bg-blue-gray-800 cursor-pointer"
+            classTypography="mb-2 py-1.5 font-bold text-pink-400 dark:text-pink-300 md:text-[27px]"
+            classChip="bg-blue-gray-800  cursor-pointer"
             classSkeleton="flex flex-wrap gap-4"
-            classItemSkeleton="genres__home-skeleton w-[5.5rem] sm:w-24  h-8 bg-gray-300 rounded"
+            classItemSkeleton="genres__home-skeleton w-[5.5rem] sm:w-24  h-8 bg-gray-300 dark:bg-slate-700/95 rounded"
             loading={loading}
             genres={genres}
             variant="h3"

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 
 export const useBreakpoint = () => {
-  const [cardCount, setCardCount] = useState(6)
-
-  const changeScreenMode = () => {
-    // const screenWidth = window.innerWidth
-    const { clientWidth } = document.documentElement
+  const [showSettingsMenu, setShowSettingsMenu] = useState(false)
+  const calculateCardCount = () => {
+    const clientWidth = window.innerWidth
     let count
 
     if (clientWidth < 600) {
@@ -20,11 +18,19 @@ export const useBreakpoint = () => {
       count = 6
     }
 
+    setShowSettingsMenu(clientWidth >= 1024)
+
+    return count
+  }
+
+  const [cardCount, setCardCount] = useState(() => calculateCardCount())
+
+  const changeScreenMode = () => {
+    const count = calculateCardCount()
     setCardCount(count)
   }
 
   useEffect(() => {
-    changeScreenMode()
     window.addEventListener('resize', changeScreenMode)
 
     return () => {
@@ -32,5 +38,5 @@ export const useBreakpoint = () => {
     }
   }, [])
 
-  return cardCount
+  return { cardCount, showSettingsMenu }
 }

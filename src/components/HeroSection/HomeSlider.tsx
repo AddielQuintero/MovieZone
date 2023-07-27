@@ -6,12 +6,13 @@ import { CONFIG } from '@config'
 import { tmdbService } from '@services'
 import { setNowPlayingMovies, useAppDispatch } from '@redux'
 import { useSelector } from 'react-redux'
-import { useLocalStorage } from '@hooks'
+import { useBreakpoint, useLocalStorage } from '@hooks'
 import { TFunction } from 'i18next'
 
 export const HomeSlider = ({ t }: { t: TFunction }) => {
   const nowPlaying = useSelector((state: TStore) => state.data.nowPlaying)
   const { isFavorite, handleFavorite } = useLocalStorage()
+  const { cardCount } = useBreakpoint()
 
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
@@ -104,7 +105,7 @@ export const HomeSlider = ({ t }: { t: TFunction }) => {
   return (
     <section className="home__slider">
       {!nowPlaying.length ? (
-        <HomeHeroSkeleton reflection />
+        <HomeHeroSkeleton reflection cardCount={cardCount} />
       ) : (
         <>
           <Slider {...settingsFor} asNavFor={nav2} ref={slider1Ref} className="slider-for">

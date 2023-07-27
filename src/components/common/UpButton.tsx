@@ -23,7 +23,7 @@ export const UpButton = () => {
   }
   return (
     <IconicButton
-      className="upButton z-10 !fixed bottom-8 right-8 hidden items-center gap-3 px-4 py-1.5 sm:py-2 text-pink-400 border border-pink-400 shadow-pink-500/20 hover:shadow-pink-500/20"
+      className="upButton z-10 !fixed bottom-8 right-8 hidden items-center gap-3 px-4 py-1.5 sm:py-2 text-pink-400 dark:text-pink-300 dark:bg-slate-950/95 border border-pink-400 dark:border-pink-300 shadow-pink-500/20 hover:shadow-pink-500/20"
       classIcon="h-5 w-5"
       color="white"
       IconComponent={ChevronUpIcon}

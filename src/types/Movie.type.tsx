@@ -174,6 +174,7 @@ export interface SpokenLanguage {
 export interface MovieSkeleton {
   reflection?: boolean
   detail?: boolean
+  cardCount?: number
 }
 
 export type TSelectors = {

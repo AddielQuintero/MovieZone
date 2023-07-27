@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-
+import { TFunction } from 'i18next'
 export interface TNavigate {
   name: string
   to: string
@@ -21,6 +21,7 @@ export interface HandleClose {
 
 export interface MobileMenuProps extends HandleClose, HookDrawerProps {
   navigation: NavigateProps
+  showSettingsMenu: boolean
 }
 
 export interface TLink extends HandleClose {
@@ -35,10 +36,10 @@ export interface HookDrawerProps {
   closeDrawer: () => void
 }
 
-export const language: LanguageProps = [
-  { label: 'es', code: 'es-ES' },
-  { label: 'en', code: 'en-US' },
-]
+// export const language: LanguageProps = [
+//   { label: 'es', code: 'es-ES' },
+//   { label: 'en', code: 'en-US' },
+// ]
 
 export const getNavigation = () => {
   const [t] = useTranslation('global')
@@ -54,7 +55,8 @@ export const getNavigation = () => {
   return navigation
 }
 
-export interface LanguageSwitcherProps {
+export interface showMobileMenu{
   mobile?: boolean
-  handleClose?: () => void
+  t?: TFunction
+  // onClose?: () => void
 }
