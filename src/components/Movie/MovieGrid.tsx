@@ -50,7 +50,7 @@ export const MovieGrid = ({ category, keyword, movies, children, loading, handle
           </div>
           {!movies.length && !loading && (
             <div className="flex justify-center items-start flex-wrap mt-10">
-              <div className="p-4 rounded-md bg-gray-300 text-pink-400 text-center">
+              <div className="p-4 rounded-md bg-gray-300 dark:bg-slate-700/95 text-pink-400 dark:text-gray-200 text-center">
                 <h1>{t('lang.noMovies')}</h1>
               </div>
             </div>
