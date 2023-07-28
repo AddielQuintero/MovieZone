@@ -12,7 +12,7 @@ export const PageHeader = ({ category = '', keyword, t }: PageHeaderProps) => {
     favorites: t('lang.favorites'),
   }
 
-  const translate = keyword === null ? translations[category] || category : keyword
+  const translate = keyword === undefined ? translations[category] || category : keyword
 
   return (
     <div className="flex justify-between items-center mb-2 gap-5">

@@ -55,7 +55,7 @@ export const Categories = () => {
     <>
       <MovieGrid
         category='categories'
-        keyword={null}
+        keyword={undefined}
         movies={byGenres}
         loading={loading}
         handleSetPage={handleSetPage}

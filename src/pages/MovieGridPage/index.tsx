@@ -37,7 +37,7 @@ export const MovieGridPage = () => {
       language: `${t('lang.langAPI')}`,
     }
 
-    if (keyword === null) {
+    if (keyword === undefined) {
       switch (category) {
         case 'trending':
           response = await tmdbService.getTrendingMovies(params)
@@ -114,8 +114,8 @@ export const MovieGridPage = () => {
   }, [category, keyword, page, t])
 
   const handleSetPage = () => {
-    setPage((prevPage) => prevPage + 1)
     pageRef.current += 1
+    setPage((prevPage) => prevPage + 1)
   }
 
   return (
