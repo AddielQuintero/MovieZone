@@ -214,3 +214,22 @@ export interface TCategoryHandlers {
 export interface TTranslations {
   [category: string]: string
 }
+
+export interface ModalProps {
+  open: boolean
+  handleClosed: () => void
+  trailerKey: string
+  t: TFunction
+}
+
+export interface TTrailer {
+  o_639_1: string
+  iso_3166_1: string
+  key: string
+  name: string
+  official: boolean
+  published_at: string
+  site: string
+  size: number
+  type: string
+}

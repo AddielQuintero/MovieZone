@@ -1,4 +1,4 @@
-import { MovieType, TMovieType, ParamsProps, TResponse, TMovieResponse } from '@types'
+import { MovieType, TMovieType, ParamsProps, TResponse, TMovieResponse, TTrailerResponse } from '@types'
 import { axiosClient } from '@config'
 
 export const tmdbService = {
@@ -65,12 +65,12 @@ export const tmdbService = {
     }
   },
 
-  getTrailerMovies: async (id: number, params?: ParamsProps) => {
+  getTrailerMovies: async (id: number, params?: ParamsProps): Promise<TTrailerResponse> => {
     try {
       const response = await axiosClient(`/movie/${id}/videos`, { params })
-      return { success: true, movies: response.data }
+      return { success: true, movies: response.data.results }
     } catch {
-      return { success: false, movies: {} as TMovieResponse }
+      return { success: false, movies: [] }
     }
   },
 }
