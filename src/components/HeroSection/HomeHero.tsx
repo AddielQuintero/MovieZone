@@ -1,12 +1,21 @@
-import { IconicButton, LinkButton, MovieBackgroundImage, MovieFavorite, MovieInfo } from '@components'
+import { IconicButton, LinkButton, MovieBackgroundImage, MovieFavorite, MovieInfo, TrailerModal } from '@components'
 import { PlayIcon, InformationCircleIcon } from '@heroicons/react/24/solid'
 import { Typography } from '@material-tailwind/react'
 import { CONFIG } from '@config'
 import { MovieProps } from '@types'
+import { useToggle, useTrailer } from '@hooks'
 
 export const HomeHero = ({ movies, favorite, t, handleFavorite }: MovieProps) => {
   const background = CONFIG.originalImage(movies.backdrop_path)
   const formattedDate = movies.release_date.slice(0, 4)
+  
+  const { trailerKey, fetchTrailer } = useTrailer(movies.id, { language: `${t('lang.langAPI')}` })
+  const { isOpen, handleOpen, handleClosed } = useToggle()
+
+  const handleTrailer = () => {
+    fetchTrailer()
+    handleOpen()
+  }
 
   return (
     <div className="home__hero flex items-center h-[calc(100vh-50px)] min-h-[620px] pt-12 pb-64 px-5 sm:px-10 md:px-12 xl:px-24 2xl:px-48">
@@ -44,6 +53,7 @@ export const HomeHero = ({ movies, favorite, t, handleFavorite }: MovieProps) =>
                 classIcon="h-5 w-5"
                 color="indigo"
                 IconComponent={PlayIcon}
+                onClick={handleTrailer}
                 name={`${t('lang.playTrailer')}`}
               />
             </div>
@@ -58,6 +68,7 @@ export const HomeHero = ({ movies, favorite, t, handleFavorite }: MovieProps) =>
           </div>
         </div>
       </div>
+      <TrailerModal open={isOpen} handleClosed={handleClosed} trailerKey={trailerKey} t={t} />
     </div>
   )
 }
