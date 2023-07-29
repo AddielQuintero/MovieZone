@@ -1,14 +1,23 @@
 import { Typography } from '@material-tailwind/react'
 import { PlayIcon, ArrowLongLeftIcon } from '@heroicons/react/24/solid'
-import { LinkButton, MovieGenres, MovieImage, MovieInfo, IconicButton, MovieFavorite } from '@components'
+import { LinkButton, MovieGenres, MovieImage, MovieInfo, IconicButton, MovieFavorite, TrailerModal } from '@components'
 import { MovieDetailProps } from '@types'
 import { formatRuntime } from '@utilities'
-import { useLocalStorage } from '@hooks'
+import { useLocalStorage, useToggle } from '@hooks'
+import { useTrailer } from '@hooks'
 
 export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
   const { isFavorite, handleFavorite } = useLocalStorage()
+  const { isOpen, handleOpen, handleClosed } = useToggle()
   const formattedDate = detailMovie.release_date.slice(0, 4)
   const formattedRuntime = formatRuntime(detailMovie.runtime)
+
+  const { trailerKey, fetchTrailer } = useTrailer(detailMovie.id, { language: `${t('lang.langAPI')}` })
+
+  const handleTrailer = () => {
+    fetchTrailer()
+    handleOpen()
+  }
 
   return (
     <div className="movie__detail grid grid-cols-1 md:grid-cols-3 place-items-start gap-6 max-w-[992px] mx-auto py-10 md:py-20">
@@ -27,9 +36,16 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
         </div>
 
         <div className="summary ">
-          <MovieInfo average={detailMovie.vote_average} runtime={formattedRuntime} date={formattedDate} className='dark:text-gray-200'>
+          <MovieInfo
+            average={detailMovie.vote_average}
+            runtime={formattedRuntime}
+            date={formattedDate}
+            className="dark:text-gray-200"
+          >
             <MovieFavorite
-              handleFavorite={() => handleFavorite(detailMovie.id, detailMovie.title, detailMovie.poster_path) }
+              handleFavorite={() =>
+                handleFavorite(detailMovie.id, detailMovie.title, detailMovie.poster_path)
+              }
               favorite={isFavorite(detailMovie.id)}
               classButton="h-5 w-5"
               classIcon="h-5 w-5 text-indigo-500 dark:text-gray-200"
@@ -51,6 +67,7 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
               classIcon="h-5 w-5"
               color="indigo"
               IconComponent={PlayIcon}
+              onClick={handleTrailer}
               name={`${t('lang.playTrailer')}`}
             />
           </div>
@@ -70,6 +87,7 @@ export const MovieDetail = ({ detailMovie, loading, t }: MovieDetailProps) => {
           />
         </div>
       </div>
+      <TrailerModal open={isOpen} handleClosed={handleClosed} trailerKey={trailerKey} t={t} />
     </div>
   )
 }

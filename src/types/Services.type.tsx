@@ -1,10 +1,16 @@
 import { AxiosRequestConfig  } from 'axios'
-import { TMovie } from '@types'
+import { TMovie, TTrailer } from '@types'
 
 export interface TResponse {
   success: boolean
   movies: TMovieResponse
 }
+
+export interface TTrailerResponse {
+  success: boolean
+  movies: TTrailer[]
+}
+
 
 export interface TMovieResponse {
   page: number

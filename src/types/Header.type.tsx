@@ -55,7 +55,7 @@ export const getNavigation = () => {
   return navigation
 }
 
-export interface showMobileMenu{
+export interface showMobileMenu {
   mobile?: boolean
   t?: TFunction
   // onClose?: () => void
