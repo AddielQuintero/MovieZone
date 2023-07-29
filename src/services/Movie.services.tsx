@@ -64,4 +64,13 @@ export const tmdbService = {
       return { success: false, movies: {} as TMovieResponse }
     }
   },
+
+  getTrailerMovies: async (id: number, params?: ParamsProps) => {
+    try {
+      const response = await axiosClient(`/movie/${id}/videos`, { params })
+      return { success: true, movies: response.data }
+    } catch {
+      return { success: false, movies: {} as TMovieResponse }
+    }
+  },
 }
