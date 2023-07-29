@@ -6,8 +6,11 @@
 
 .genres__filter,
 .genres__filter--skeleton {
+  scrollbar-color: rgb(236 64 122) #d1d5db;
+  scrollbar-width: thin;
+
   &::-webkit-scrollbar {
-    height: 15px;
+    height:.5rem;
   }
 
   &::-webkit-scrollbar-thumb {
