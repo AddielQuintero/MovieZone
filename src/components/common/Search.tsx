@@ -16,10 +16,10 @@ export const CustomSearch = ({ onClose }: { onClose?: () => void }) => {
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
-    const params = new URLSearchParams()
-    value && params.set('name', value)
+    // const params = new URLSearchParams()
+    // value && params.set('name', value)
     // value && navigate({ pathname: '/search', search: params.toString() })
-    navigate(`/search/${value}`)
+    value.trim() && navigate(`/search/${value}`)
     setValue('')
     onClose && onClose()
     inputRef.current && inputRef.current.blur()
