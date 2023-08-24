@@ -5,12 +5,12 @@ import { MoonIcon } from '@heroicons/react/24/solid'
 import { SunIcon } from '@heroicons/react/24/outline'
 
 export const ThemeSwitcher = ({ mobile, t }: showMobileMenu) => {
-  const lang = () => {
+  const theme = () => {
     const storedTheme = localStorage.getItem('theme')
     return storedTheme ? storedTheme : 'dark'
   }
 
-  const [isSwitchOn, setIsSwitchOn] = useState(lang() === 'dark')
+  const [isSwitchOn, setIsSwitchOn] = useState(theme() === 'dark')
 
   const handleSwitchChange = () => {
     const newTheme = isSwitchOn ? 'light' : 'dark'

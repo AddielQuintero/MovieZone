@@ -9,7 +9,7 @@ export const useLocalStorage = () => {
 
   useEffect(() => {
     if (!favorites.length) {
-      const favoriteStorage: TMovie[] = JSON.parse(localStorage.getItem('FAVORITES_V1') ?? '[]')
+      const favoriteStorage: TMovie[] = JSON.parse(localStorage.getItem('FAVORITE_MOVIES') ?? '[]')
       dispatch(setFavoritesMovies(favoriteStorage))
     }
   }, [])

@@ -51,7 +51,7 @@ export const DataSlice = createSlice({
         ? [...state.favorites, action.payload]
         : state.favorites.filter((favorite) => favorite.id !== action.payload.id)
 
-      localStorage.setItem('FAVORITES_V1', JSON.stringify(favorites))
+      localStorage.setItem('FAVORITE_MOVIES', JSON.stringify(favorites))
       state.favorites = favorites
     },
     clearMovies: (state) => {
